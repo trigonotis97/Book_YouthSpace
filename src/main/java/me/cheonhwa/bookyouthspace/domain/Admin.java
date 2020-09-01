@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of ="id")
-public class Manager {
+public class Admin {
 
     @Id @GeneratedValue
     private Long id;

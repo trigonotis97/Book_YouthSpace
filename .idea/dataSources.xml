@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="testuser" uuid="57017c3b-d3d3-4c77-96dd-3e4796c80543">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@procyon0.ck4kg3glcu4x.ap-northeast-2.rds.amazonaws.com:1521:ORCL</jdbc-url>
+    </data-source>
+  </component>
+</project>

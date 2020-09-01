@@ -1,6 +1,6 @@
 package me.cheonhwa.bookyouthspace.domain;
 
 
-public enum SexType {
+public enum Gender {
     MALE, FEMALE
 }

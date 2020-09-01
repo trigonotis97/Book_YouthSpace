@@ -29,7 +29,7 @@ public class Visitor {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private SexType sex;
+    private Gender gender;
 
     private String reservedContentTitle;
 

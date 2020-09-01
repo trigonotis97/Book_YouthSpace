@@ -2,15 +2,69 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments.html :: head"></head>
-<body>
- <div class="container">
-  <div class="row">
-   <div class="col-sm-6">
-    꾸마 온라인 예약
+<body class="bg-light">
+<div class="container main-container">
+    <div class="row">
+        <div class="col">
+            <br/>
 
-   </div>
-  </div>
- </div>
+            <h1>꾸마 2층 문화공감 온라인 예약</h1>
+            <br/>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" onclick="location.href='/book/form'">예약 신청</button>
+            <button type="button" class="btn btn-outline-success" onclick="location.href='/book/confirm'">예약 확인</button>
+            <button type="button" class="btn btn-outline-danger" onclick="location.href='/book/modify/login'">예약 수정</button>
+            <br />
+            <br />
+        </div>
+    </div>
+
+            <!--
+        <div class="row">
+            <div class="col-sm-4">
+                <form th:action="@{/book/form}" method="get">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">예약 신청하기</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form th:action="@{/book/view}" method="get">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-success">예약 확인하기</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form th:action="@{/book/application}" method="get">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-danger">예약 취소하기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+-->
+
+
+    <div class="row">
+        <div class="col">
+            <img src="images/main-poster.png">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <hr/>
+            <p>
+                <button type="button" class="btn btn-info" onclick="location.href='/admin/login'">관리자 로그인</button>
+            </p>
+        </div>
+    </div>
+</div>
 
 </body>
-</html>
+</html>`
