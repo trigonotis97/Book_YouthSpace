@@ -16,13 +16,13 @@ public class Visitor {
     private Long id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String phoneNumber;
 
     @Column(nullable = false)
     private String password;
-
-    @Column(nullable = false)
-    private String name;
 
     @Column(nullable = false)
     private int age;
@@ -31,11 +31,18 @@ public class Visitor {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String reservedContentTitle;
-
+    //날짜
     private LocalDate reservedDate;
-
+    //희망시간
     private String reservedTime;
 
+    //이용하고싶은것
+    private String munGongContent;
+
+
+    private String reservedContentTitle;
+
+
     private LocalDateTime updateReservationDateTime;
+
 }
