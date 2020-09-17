@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <title>HI!</title>
+    <style th:replace="fragments.html :: head-style"></style>
+</head>
+<body>
+<div th:replace="fragments.html :: head-src"></div>
+    <h3 id="name">빈칸</h3>
+    <button type="button" id="ajaxButton">button</button>
+</body>
+<script type="application/javascript" th:inline="javascript">
+    $(function(){
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        function ajaxPost(){
+            $.ajax({
+                url:"/book/ajax",
+                type:"POST",
+                data: {
+                    text:"helloo",
+                },
+                dataType:"text",
+                success: function (data) {
+                    $("#name").text(data);
+                },
+                error: function () {
+                    alert("error");
+                }
+            })
+        }
+
+        $("#ajaxButton").click(function () {
+            ajaxPost();
+        });
+    });
+</script>
+</html>

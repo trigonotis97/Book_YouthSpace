@@ -7,9 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter @EqualsAndHashCode ( of="id")
-@Builder @AllArgsConstructor
-@NoArgsConstructor
+@Getter @Setter @EqualsAndHashCode( of="id")
+@AllArgsConstructor @NoArgsConstructor
 public class Visitor {
 
     @Id @GeneratedValue
@@ -32,17 +31,19 @@ public class Visitor {
     private Gender gender;
 
     //날짜
+    @Column(nullable = false)
     private LocalDate reservedDate;
+
     //희망시간
+    @Column(nullable = false)
     private String reservedTime;
 
     //이용하고싶은것
+
     private String munGongContent;
 
-
-    private String reservedContentTitle;
-
-
-    private LocalDateTime updateReservationDateTime;
+    //최종예약수정시간
+    @Column(nullable = false)
+    private LocalDateTime reservationUpdateDateTime;
 
 }

@@ -3,13 +3,12 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
-    <title>home</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="node_modules/jdenticon/dist/jdenticon.min.js"></script>
+    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
     <style>
         .container {
             max-width: 100%;
@@ -22,3 +21,22 @@
 
     </style>
 </head>
+<style th:fragment="head-style">
+    .container {
+        max-width: 100%;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+    .main-container {
+        text-align: center;
+
+    }
+
+</style>
+<div th:fragment="head-src">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
+</div>

@@ -49,7 +49,7 @@ public class MunGongContent {
     }
 
 
-    public String getContentsName() {
+    public String getContentToName() {
         String contentName="";
         if(contents[0]) contentName +="컴퓨터,";
         if(contents[1]) contentName +="당구,";

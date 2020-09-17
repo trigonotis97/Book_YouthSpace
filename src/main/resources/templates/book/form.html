@@ -12,11 +12,31 @@ booking view
 <div class="container">
     <div class="row">
         <div class="col">
-            <form th:action="@{/book/submit}" th:object="${visitor}" method="post">
+            <form class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" >
+                <!-- 이름 -->
                 <div class="form-group">
                     <label for="name">이름</label>
-                    <input id="name" name="name" class="form-control" required/>
+                    <input id="name" th:field="*{name}" name="name" type="text" class="form-control" required/>
+                    <small class="invalid-feedback">이름을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{name}">Email Error</small>
                 </div>
+                <!-- 전화번호 -->
+                <div class="form-group">
+                    <label for="phoneNumber">이름</label>
+                    <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="" class="form-control" required/>
+                    <small class="invalid-feedback">이름을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{name}">Email Error</small>
+                </div>
+                <!-- 비밀번호 -->
+                <!-- 나이 -->
+                <!-- 성별 -->
+                <!-- 예약 날짜 -->
+                <!-- 예약 시간 -->
+                <!-- 이용 하고 싶은것 -->
+
+                <!-- 최종 예약 시간 -->
+
+
             </form>
         </div>
     </div>
