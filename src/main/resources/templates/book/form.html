@@ -1,45 +1,104 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments.html :: head">
+<head>
     <meta charset="UTF-8">
     <title>문화공감 예약 신청서</title>
+    <style th:replace="fragments.html :: head-style"></style>
 </head>
 <body>
 <p>
-booking view
+    booking view
 </p>
 <div class="container">
     <div class="row">
         <div class="col">
-            <form class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" >
+            <form class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" novalidate>
                 <!-- 이름 -->
                 <div class="form-group">
                     <label for="name">이름</label>
                     <input id="name" th:field="*{name}" name="name" type="text" class="form-control" required/>
                     <small class="invalid-feedback">이름을 입력하세요.</small>
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{name}">Email Error</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        name Error
+                    </small>
                 </div>
-                <!-- 전화번호 -->
+                <!-- 전화번호-->
                 <div class="form-group">
-                    <label for="phoneNumber">이름</label>
-                    <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="" class="form-control" required/>
-                    <small class="invalid-feedback">이름을 입력하세요.</small>
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{name}">Email Error</small>
+                    <label for="phoneNumber">전화번호</label>
+                    <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="text" class="form-control"
+                           placeholder="010-0000-0000" aria-describedby="phoneNumberHelp" required pattern="^\d{3}-\d{3,4}-\d{4}$"/>
+                    <small id="phoneNumberHelp" class="form-text text-muted">
+                        "-" 를 포함한 휴대폰 번호를 입력해주세요
+                    </small>
+                    <small class="invalid-feedback">"-" 를 포함해 010-0000-0000 형식의 휴대폰 번호를 입력해주세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number Error</small>
                 </div>
-                <!-- 비밀번호 -->
-                <!-- 나이 -->
+                <!-- 나이-->
+                <div class="form-group">
+                    <label for="age">나이</label>
+                    <input id="age" th:field="*{age}" name="age" type="text" class="form-control"  pattern="[0-9]{1,2}" required />
+                    <small class="invalid-feedback">올바른 나이를 입력해주세요</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age Error</small>
+                </div>
                 <!-- 성별 -->
+                <div class="form-group">
+                    <label>성별</label>
+                    <div th:each="gender : ${T(me.cheonhwa.bookyouthspace.domain.Gender).values()}">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" th:field="*{gender}" th:value="${gender}" class="custom-control-input" required />
+                            <label class="custom-control-label" th:for="${#ids.prev('gender')}"
+                                   th:text="${gender.equals(T(me.cheonhwa.bookyouthspace.domain.Gender).MALE)} ? '남자' : '여자'">gender</label>
+                            <small class="invalid-feedback">나이를 선택해 주세요</small>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 예약 날짜 -->
+                <div class="form-group">
+                    <label for="datePicker">예약 날짜</label>
+                    <input id="datePicker" type="date" th:field="*{reservedDate}" class="form-control" required />
+                    <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
+                </div>
                 <!-- 예약 시간 -->
+                <div class="form-group" id="timeTable" hidden="hidden">
+                    <label for="reservedTimePart">예약 날짜</label>
+                    <input id="reservedTimePart" type="text" th:field="*{reservedTimePart}" class="form-control" required />
+                    <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
+                </div>
                 <!-- 이용 하고 싶은것 -->
 
                 <!-- 최종 예약 시간 -->
 
 
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
+<div th:replace="fragments.html :: head-src"></div>
+
+<div th:replace="fragments.html :: form-validation"></div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous"></script>
+<script type="application/javascript">
+    $(function(){
+        $("#datePicker").datepicker({
+            format: "yyyy-mm-dd",
+            startDate: '0d',
+            endDate: '+7d',
+            language: "ko",
+            daysOfWeekDisabled: [1],
+            autoclose : true,
+
+        }).on("changeDate",function () {
+            alert("select  datepicker TODO : 날짜에 대한 예약인원 정보 가져오기");
+        })
+    });
+</script>
 </html>

@@ -36,7 +36,7 @@ public class Visitor {
 
     //희망시간
     @Column(nullable = false)
-    private String reservedTime;
+    private String reservedTimePart;
 
     //이용하고싶은것
 

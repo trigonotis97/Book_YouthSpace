@@ -3,6 +3,7 @@ package me.cheonhwa.bookyouthspace.book;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import me.cheonhwa.bookyouthspace.domain.TimePart;
+import me.cheonhwa.bookyouthspace.domain.Visitor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,8 +21,7 @@ public class BookController {
     @GetMapping("/form")
     public String bookingFormView(Model model){
         //TODO : 선택한 하루 예약 보내기
-
-
+        model.addAttribute("visitor",new Visitor());
 
         return "book/form";
     }
