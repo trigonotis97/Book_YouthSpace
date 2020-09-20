@@ -8,5 +8,11 @@
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@procyon0.ck4kg3glcu4x.ap-northeast-2.rds.amazonaws.com:1521:ORCL</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="bookspacedb" uuid="b4c84cab-e3e6-47b9-98ec-a6661e09196f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/bookspacedb</jdbc-url>
+    </data-source>
   </component>
 </project>

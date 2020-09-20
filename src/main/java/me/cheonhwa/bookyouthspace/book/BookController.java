@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/book")
@@ -25,6 +28,24 @@ public class BookController {
 
         return "book/form";
     }
+
+
+    @GetMapping("/get-day-booking-status")
+    public ResponseEntity getDayBookingStatus(@RequestParam String date){
+        System.out.println(date);
+        LocalDate newDate=LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        return ResponseEntity.ok("get-day-booking-status");
+    }
+
+    @PostMapping("/ajax-date")
+    public ResponseEntity postDayBookingStatus(@RequestBody String date){
+        System.out.println(date);
+        //System.out.println(date.getDayOfWeek());
+        return ResponseEntity.ok("haha "+date);
+    }
+
+
+
 
     @GetMapping("/test-ajax")
     public String testAjaxView(){

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>문화공감 예약 신청서</title>
     <style th:replace="fragments.html :: head-style"></style>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <body>
 <p>
@@ -56,19 +58,20 @@
 
                 <!-- 예약 날짜 -->
                 <div class="form-group">
-                    <label for="datePicker">예약 날짜</label>
-                    <input id="datePicker" type="date" th:field="*{reservedDate}" class="form-control" required />
+                    <label for="calender">예약 날짜</label>
+                    <input id="calender" type="date" th:field="*{reservedDate}" class="form-control" required />
                     <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
                 </div>
                 <!-- 예약 시간 -->
                 <div class="form-group" id="timeTable" hidden="hidden">
-                    <label for="reservedTimePart">예약 날짜</label>
+                    <label for="reservedTimePart">예약 시간</label>
                     <input id="reservedTimePart" type="text" th:field="*{reservedTimePart}" class="form-control" required />
-                    <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
+                    <small class="invalid-feedback">예약 시간를 선택해 주세요</small>
                 </div>
                 <!-- 이용 하고 싶은것 -->
 
                 <!-- 최종 예약 시간 -->
+
 
 
 
@@ -79,16 +82,24 @@
         </div>
     </div>
 </div>
-<div th:replace="fragments.html :: head-src"></div>
 
-<div th:replace="fragments.html :: form-validation"></div>
 </body>
+<div th:replace="fragments.html :: head-src"></div>
+<div th:replace="fragments.html :: form-validation"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous"></script>
-<script type="application/javascript">
+<script type="application/javascript" th:inline="javascript">
     $(function(){
-        $("#datePicker").datepicker({
+
+        var token = $("meta[name='_csrf']").attr("content");
+        var header =$("meta[name='_csrf_header']").attr("content");
+
+        $(document).ajaxSend(function(e, xhr, options) {
+            xhr.setRequestHeader(header, token);
+        });
+
+        $("#calender").datepicker({
             format: "yyyy-mm-dd",
             startDate: '0d',
             endDate: '+7d',
@@ -98,7 +109,27 @@
 
         }).on("changeDate",function () {
             alert("select  datepicker TODO : 날짜에 대한 예약인원 정보 가져오기");
-        })
+            getTimePartData();
+        });
+        
+        function getTimePartData() {
+            var curdate=document.getElementById("calender").value;
+            console.log($("#calender").datepicker('getDate'));
+            console.log(curdate+"??");
+            $.ajax({
+                url:"/book/get-day-booking-status?date=2020-09-09",
+                type:"GET",
+                dataType:"text",
+                success: function (data) {
+                   alert(data+curdate);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
     });
 </script>
+
+
 </html>
