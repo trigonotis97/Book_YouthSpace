@@ -16,13 +16,13 @@ public class TimePart {
     @GeneratedValue
     private Long id;
 
-    //예약 날짜
+    //날짜
     @Column(nullable = false)
-    private LocalDate reservedDate;
+    private LocalDate date;
 
     //희망시간(타임파트 1~4)
     @Column(nullable = false)
-    private int reservedTimePart;
+    private int timePart;
 
     //최대예약인원
     private int max;
