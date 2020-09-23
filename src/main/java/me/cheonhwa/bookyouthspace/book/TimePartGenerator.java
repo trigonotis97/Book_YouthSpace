@@ -1,6 +1,7 @@
 package me.cheonhwa.bookyouthspace.book;
 
 import lombok.RequiredArgsConstructor;
+import me.cheonhwa.bookyouthspace.domain.SystemData;
 import me.cheonhwa.bookyouthspace.domain.TimePart;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 
@@ -25,42 +28,65 @@ public class TimePartGenerator implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("ApplicationRunner is now Driven");
-        TimePart currentTimePart = new TimePart().builder().date(LocalDate.now()).timePart(1).max(10).build();
-        timePartRepository.save(currentTimePart);
+        generateTimePartRecord();
     }
 
-    public void initTimePartRecord(){
+    //매주 월요일 1시 실행
+    @Scheduled(cron = "0 0 1 * * MON")
+    public void generateTimePartRecord(){
         //TODO: 2주치 TimePart 미리생성
         //TODO: 이미 생성된 날짜는 중복생성 금지시키기
 
         Optional<TimePart> lastUpdateTimePart = timePartRepository.findById(timePartRepository.count());
-        if(!lastUpdateTimePart.isPresent()){
-            LocalDate countDate=LocalDate.now();
-            for (int i = 0; i <14 ; i++ ) {
-                if(countDate.getDayOfWeek()== DayOfWeek.MONDAY)
-                    continue;
-                else if(countDate.getDayOfWeek()== DayOfWeek.SUNDAY ||  countDate.getDayOfWeek()== DayOfWeek.SATURDAY) {
+        LocalDate countDate;
+        int counter;
 
-                }
-                else {
+        //만들어진 레코드가 없는경우
+        if(!lastUpdateTimePart.isPresent()) {
+            countDate= LocalDate.now();
+            counter=0;
+        }
+        //이미 만들어진 레코드가 있는경우
+        else {
+            counter= (int)ChronoUnit.DAYS.between(LocalDate.now(),lastUpdateTimePart.get().getDate());
+            System.out.println("날짜 차이 : "+ counter);
+            countDate=lastUpdateTimePart.get().getDate().plusDays(1); counter++;
+            System.out.println("시작 날짜: "+ countDate);
+        }
 
-                }
+
+        //해당일부터 2주치 생성
+        for (; counter <14; counter++, countDate=countDate.plusDays(1)) {
+            int timePartCounter=0;
+
+            //월요일은 제외
+            if(countDate.getDayOfWeek()== DayOfWeek.MONDAY) {
+                continue;
+            }
+            //주말
+            else if(countDate.getDayOfWeek()== DayOfWeek.SUNDAY ||  countDate.getDayOfWeek()== DayOfWeek.SATURDAY){
+                timePartCounter=3;
+            }
+            //평일
+            else {
+                timePartCounter = 4;
+            }
+
+            System.out.println(counter+"회차 "+"레코드 기록 날짜 : " + countDate);
+            for (int j = 1; j <= timePartCounter; j++) {
+                TimePart currentTimePart = TimePart.builder().date(countDate).timePart(j).max(SystemData.MAXIMUM_BOOKING_NUMBER).build();
+                timePartRepository.save(currentTimePart);
 
             }
+
         }
-        else
+
+
 
         lastGenerateTime=LocalDateTime.now();
         System.out.println(" Init TimePart Record ( 2 week ) ");
     }
 
-    //매주 월요일 1시 실행
-    @Scheduled(cron = "0 0 1 * * MON")
-    protected void generateWeekTimePartRecord(){
-        //TODO: 이미 생성된 날짜는 중복생성 금지시키기
-        lastGenerateTime=LocalDateTime.now();
-        System.out.println("generated Week TimePart. now Time is : " + lastGenerateTime);
-    }
 
     /*
     @Scheduled(cron = "* * * * * *")
