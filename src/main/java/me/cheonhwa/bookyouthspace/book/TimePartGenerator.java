@@ -72,12 +72,13 @@ public class TimePartGenerator implements ApplicationRunner {
                 timePartCounter = 4;
             }
 
-            System.out.println(counter+"회차 "+"레코드 기록 날짜 : " + countDate);
+
             for (int j = 1; j <= timePartCounter; j++) {
                 TimePart currentTimePart = TimePart.builder().date(countDate).timePart(j).max(SystemData.MAXIMUM_BOOKING_NUMBER).build();
                 timePartRepository.save(currentTimePart);
 
             }
+            System.out.println(counter+"회차 "+"레코드 기록 날짜 : " + countDate);
 
         }
 

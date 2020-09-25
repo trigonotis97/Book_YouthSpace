@@ -25,10 +25,8 @@
         function ajaxPost(){
             $.ajax({
                 url:"/book/ajax",
-                type:"POST",
-                data: {
-                    text:"helloo",
-                },
+                type:"GET",
+
                 dataType:"text",
                 success: function (data) {
                     $("#name").text(data);

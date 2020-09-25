@@ -8,6 +8,10 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
+<div th:replace="fragments.html :: head-src"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous"></script>
 <body>
 <p>
     booking view
@@ -59,14 +63,69 @@
                 <!-- 예약 날짜 -->
                 <div class="form-group">
                     <label for="calender">예약 날짜</label>
-                    <input id="calender" type="date" th:field="*{reservedDate}" class="form-control" required />
+                    <input id="calender" type="text" th:field="*{reservedDate}" class="form-control"
+                           placeholder="여기를 눌러 날짜를 선택하세요" required />
                     <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
                 </div>
                 <!-- 예약 시간 -->
-                <div class="form-group" id="timeTable" hidden="hidden">
-                    <label for="reservedTimePart">예약 시간</label>
-                    <input id="reservedTimePart" type="text" th:field="*{reservedTimePart}" class="form-control" required />
-                    <small class="invalid-feedback">예약 시간를 선택해 주세요</small>
+                <div class="form-group" id="time-part" style="display: none">
+                    <label for="timetable">예약 시간</label>
+                    <table class="table" id="timetable" >
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">이용시간</th>
+                            <th scope="col">예약가능인원 (현재 예약인원)</th>
+                            <th scope="col">예약할 시간</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1타임</th>
+                            <td>10:00 ~ 12:00</td>
+                            <td id="1-timePart-personnel">-1</td>
+                            <td>
+                                <div class="form-check">
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="1" class="form-check-input" required />
+                                    <small class="invalid-feedback">예약시간을 선택해 주세요</small>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2타임</th>
+                            <td>12:30 ~ 14:30</td>
+                            <td id="2-timePart-personnel">-1</td>
+                            <td>
+                                <div class="form-check">
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="2" class="form-check-input" required />
+                                    <small class="invalid-feedback">예약시간을 선택해 주세요</small>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3타임</th>
+                            <td>15:00 ~ 17:00</td>
+                            <td id="3-timePart-personnel">-1</td>
+                            <td>
+                                <div class="form-check">
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="3" class="form-check-input" required />
+                                    <small class="invalid-feedback">예약시간을 선택해 주세요</small>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="4-time" style="display: none">
+                            <th scope="row">4타임</th>
+                            <td>17:30 ~ 19:30</td>
+                            <td id="4-timePart-personnel">-1</td>
+                            <td>
+                                <div class="form-check">
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="4" class="form-check-input" required />
+                                    <small class="invalid-feedback">예약시간을 선택해 주세요</small>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- 이용 하고 싶은것 -->
 
@@ -79,16 +138,15 @@
                     <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기</button>
                 </div>
             </form>
+            <button type="button" id="hidebtn">hide</button>
+            <button type="button" id="showbtn">show</button>
         </div>
     </div>
 </div>
 
 </body>
-<div th:replace="fragments.html :: head-src"></div>
+
 <div th:replace="fragments.html :: form-validation"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous"></script>
 <script type="application/javascript" th:inline="javascript">
     $(function(){
 
@@ -121,13 +179,26 @@
                 type:"GET",
                 dataType:"text",
                 success: function (data) {
-                   alert(data+" : "+curdate);
+                    alert(data);
+                    $('#time-part').show();
+
                 },
                 error: function () {
                     alert("error");
                 }
             });
         }
+
+
+
+        $('#hidebtn').click(function () {
+            $('#time-part').hide();
+        });
+
+        $('#showbtn').click(function () {
+            $('#time-part').show();
+        })
+
     });
 </script>
 

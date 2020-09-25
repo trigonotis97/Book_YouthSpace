@@ -2,6 +2,7 @@ package me.cheonhwa.bookyouthspace.book;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import me.cheonhwa.bookyouthspace.domain.DayBookingPersonnel;
 import me.cheonhwa.bookyouthspace.domain.TimePart;
 import me.cheonhwa.bookyouthspace.domain.Visitor;
 import org.springframework.data.repository.query.Param;
@@ -31,10 +32,13 @@ public class BookController {
 
 
     @GetMapping("/get-day-booking-status")
-    public ResponseEntity getDayBookingStatus(@RequestParam String date){
+    @ResponseBody
+    public Object getDayBookingStatus(@RequestParam String date){
         System.out.println(date);
-        LocalDate newDate=LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
-        return ResponseEntity.ok("get-day-booking-status");
+        LocalDate selectedDate=LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
+        //DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(selectedDate);
+
+        return "dayBookingPersonnel";
     }
 
     @PostMapping("/ajax-date")
@@ -52,6 +56,15 @@ public class BookController {
         return "book/test-ajax";
     }
 
+
+    @GetMapping("/ajax")
+    @ResponseBody
+    public Object testAjaxGet(){
+
+        return "send object";
+    }
+
+    /*
     @PostMapping("/ajax")
     @ResponseBody
     public ResponseEntity testAjaxPost(@RequestBody String text){
@@ -59,6 +72,8 @@ public class BookController {
 
         return ResponseEntity.ok("okkk");
     }
+
+     */
 
 
 
