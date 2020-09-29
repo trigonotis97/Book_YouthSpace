@@ -9,10 +9,17 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 <div th:replace="fragments.html :: head-src"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous"></script>
-<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+        crossorigin="anonymous"></script>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw=="
+      crossorigin="anonymous"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"
+        integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
+        crossorigin="anonymous"></script>
+<body class="bg-light">
 <p>
     booking view
 </p>
@@ -32,30 +39,35 @@
                 <!-- 전화번호-->
                 <div class="form-group">
                     <label for="phoneNumber">전화번호</label>
-                    <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="text" class="form-control"
-                           placeholder="010-0000-0000" aria-describedby="phoneNumberHelp" required pattern="^\d{3}-\d{3,4}-\d{4}$"/>
+                    <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="text"
+                           class="form-control"
+                           placeholder="010-0000-0000" aria-describedby="phoneNumberHelp" required
+                           pattern="^\d{3}-\d{3,4}-\d{4}$"/>
                     <small id="phoneNumberHelp" class="form-text text-muted">
                         "-" 를 포함한 휴대폰 번호를 입력해주세요
                     </small>
                     <small class="invalid-feedback">"-" 를 포함해 010-0000-0000 형식의 휴대폰 번호를 입력해주세요.</small>
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phone number Error</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('phoneNumber')}"
+                           th:errors="*{phoneNumber}">phone number Error</small>
                 </div>
                 <!-- 나이-->
                 <div class="form-group">
                     <label for="age">나이</label>
-                    <input id="age" th:field="*{age}" name="age" type="text" class="form-control"  pattern="[0-9]{1,2}" required />
+                    <input id="age" th:field="*{age}" name="age" type="text" class="form-control" pattern="[0-9]{1,2}"
+                           required/>
                     <small class="invalid-feedback">올바른 나이를 입력해주세요</small>
-                    <small class="form-text text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age Error</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age
+                        Error</small>
                 </div>
                 <!-- 성별 -->
                 <div class="form-group">
                     <label>성별</label>
                     <div th:each="gender : ${T(me.cheonhwa.bookyouthspace.domain.Gender).values()}">
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" th:field="*{gender}" th:value="${gender}" class="custom-control-input" required />
+                            <input type="radio" th:field="*{gender}" th:value="${gender}" class="custom-control-input"
+                                   required/>
                             <label class="custom-control-label" th:for="${#ids.prev('gender')}"
                                    th:text="${gender.equals(T(me.cheonhwa.bookyouthspace.domain.Gender).MALE)} ? '남자' : '여자'">gender</label>
-                            <small class="invalid-feedback">나이를 선택해 주세요</small>
                         </div>
                     </div>
                 </div>
@@ -64,13 +76,13 @@
                 <div class="form-group">
                     <label for="calender">예약 날짜</label>
                     <input id="calender" type="text" th:field="*{reservedDate}" class="form-control"
-                           placeholder="여기를 눌러 날짜를 선택하세요" required />
+                           placeholder="여기를 눌러 날짜를 선택하세요" required/>
                     <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
                 </div>
                 <!-- 예약 시간 -->
                 <div class="form-group" id="time-part" style="display: none">
                     <label for="timetable">예약 시간</label>
-                    <table class="table" id="timetable" >
+                    <table class="table" id="timetable">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -86,7 +98,8 @@
                             <td id="1-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="1" class="form-check-input" required />
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="1"
+                                           class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
                             </td>
@@ -97,7 +110,8 @@
                             <td id="2-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="2" class="form-check-input" required />
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="2"
+                                           class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
                             </td>
@@ -108,7 +122,8 @@
                             <td id="3-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="3" class="form-check-input" required />
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="3"
+                                           class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
                             </td>
@@ -119,7 +134,8 @@
                             <td id="4-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="4" class="form-check-input" required />
+                                    <input type="radio" th:field="*{reservedTimePart}" th:value="4"
+                                           class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
                             </td>
@@ -128,14 +144,30 @@
                     </table>
                 </div>
                 <!-- 이용 하고 싶은것 -->
-
-                <!-- 최종 예약 시간 -->
-
-
-
-
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기</button>
+                    <label>이용하고 싶은것</label>
+                    <div th:block th:with="ind=${0}">
+                        <div th:each="contentName : ${contentNames}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                       th:field="${mungongContents.contents[__${contentNameStat.index}__]}"
+                                       th:value="true"/>
+                                <label class="form-check-label" th:text="${contentName}">
+                                    checkbox
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 최종 예약 수정 시간 : 클라이언트 타임존을 기준으로 저장되기 때문에 서버에서 따로 저장한다.
+                <div class="form-group">
+                    <input type="datetime-local" th:field="*{reservationUpdateDateTime}" th:value="">
+                </div>
+                -->
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기
+                    </button>
                 </div>
             </form>
             <button type="button" id="hidebtn">hide</button>
@@ -148,12 +180,12 @@
 
 <div th:replace="fragments.html :: form-validation"></div>
 <script type="application/javascript" th:inline="javascript">
-    $(function(){
+    $(function () {
 
         var token = $("meta[name='_csrf']").attr("content");
-        var header =$("meta[name='_csrf_header']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
 
-        $(document).ajaxSend(function(e, xhr, options) {
+        $(document).ajaxSend(function (e, xhr, options) {
             xhr.setRequestHeader(header, token);
         });
 
@@ -163,23 +195,39 @@
             endDate: '+7d',
             language: "ko",
             daysOfWeekDisabled: [1],
-            autoclose : true,
+            autoclose: true,
 
-        }).on("changeDate",function () {
+        }).on("changeDate", function () {
             alert("select  datepicker TODO : 날짜에 대한 예약인원 정보 가져오기");
             getTimePartData();
         });
-        
+
         function getTimePartData() {
-            var curdate=document.getElementById("calender").value;
+            var curdate = document.getElementById("calender").value;
             console.log($("#calender").datepicker('getDate'));
-            console.log(curdate+"??");
+            console.log(curdate + "??");
             $.ajax({
-                url:"/book/get-day-booking-status?date="+curdate,
-                type:"GET",
-                dataType:"text",
+                url: "/book/get-day-booking-status?date=" + curdate,
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8;",
                 success: function (data) {
-                    alert(data);
+                    console.log(data);
+                    if (!data.weekend) {
+                        $('#4-time').show();
+                    } else {
+                        $('#4-time').hide();
+                    }
+                    console.log("data.personnel[0] : " + data.personnel[0]);
+                    console.log("data.personnel[1] : " + data.personnel[1]);
+                    console.log("data.personnel[2] : " + data.personnel[2]);
+                    console.log("data.weekend : " + data.weekend);
+                    $.each(data.personnel, function (idx, val) {
+                        console.log("data.personnel [" + idx + "] " + val);
+                    });
+                    $.each(data, function (idx, val) {
+                        console.log("data [" + idx + "] " + val);
+                    })
                     $('#time-part').show();
 
                 },
@@ -190,14 +238,15 @@
         }
 
 
-
         $('#hidebtn').click(function () {
             $('#time-part').hide();
         });
 
         $('#showbtn').click(function () {
             $('#time-part').show();
-        })
+        });
+
+        //TODO: submit 작동시(validation 후) 문공 컨텐츠 넣는 작업
 
     });
 </script>

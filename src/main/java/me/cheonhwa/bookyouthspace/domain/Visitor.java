@@ -1,6 +1,7 @@
 package me.cheonhwa.bookyouthspace.domain;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode( of="id")
+@Builder
 @AllArgsConstructor @NoArgsConstructor
 public class Visitor {
 
@@ -36,7 +38,7 @@ public class Visitor {
 
     //희망시간
     @Column(nullable = false)
-    private String reservedTimePart;
+    private int reservedTimePart;
 
     //이용하고싶은것
 

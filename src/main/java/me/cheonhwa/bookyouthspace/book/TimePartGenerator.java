@@ -74,7 +74,11 @@ public class TimePartGenerator implements ApplicationRunner {
 
 
             for (int j = 1; j <= timePartCounter; j++) {
-                TimePart currentTimePart = TimePart.builder().date(countDate).timePart(j).max(SystemData.MAXIMUM_BOOKING_NUMBER).build();
+                TimePart currentTimePart = TimePart.builder()
+                        .date(countDate)
+                        .timePart(j)
+                        .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
+                        .build();
                 timePartRepository.save(currentTimePart);
 
             }

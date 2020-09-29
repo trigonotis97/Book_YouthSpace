@@ -2,13 +2,12 @@ package me.cheonhwa.bookyouthspace.book;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import me.cheonhwa.bookyouthspace.domain.DayBookingPersonnel;
-import me.cheonhwa.bookyouthspace.domain.TimePart;
-import me.cheonhwa.bookyouthspace.domain.Visitor;
+import me.cheonhwa.bookyouthspace.domain.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -26,9 +25,13 @@ public class BookController {
     public String bookingFormView(Model model){
         //TODO : 선택한 하루 예약 보내기
         model.addAttribute("visitor",new Visitor());
+        model.addAttribute("mungongContents",new MunGongContent());
+        model.addAttribute("contentNames",MunGongContent.getContentNamesToList());
 
         return "book/form";
     }
+    
+    
 
 
     @GetMapping("/get-day-booking-status")
@@ -36,9 +39,24 @@ public class BookController {
     public Object getDayBookingStatus(@RequestParam String date){
         System.out.println(date);
         LocalDate selectedDate=LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
-        //DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(selectedDate);
+        DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(selectedDate);
+        System.out.println(dayBookingPersonnel.isWeekend());
+        return dayBookingPersonnel;
+    }
 
-        return "dayBookingPersonnel";
+
+
+
+    @PostMapping("/submit")
+    public String bookSubmit(Visitor visitor){
+        //TODO : 해당 타임파트의 예약이 초과했을경우의 @Valid + validation 만들기 및 Errors
+        bookService.saveBooking(visitor);
+        return "redirect:/book/success";
+    }
+
+    @GetMapping("/success")
+    public String bookSuccessView(Model model){
+        return "book/success";
     }
 
     @PostMapping("/ajax-date")
@@ -47,7 +65,6 @@ public class BookController {
         //System.out.println(date.getDayOfWeek());
         return ResponseEntity.ok("haha "+date);
     }
-
 
 
 
@@ -78,14 +95,4 @@ public class BookController {
 
 
 
-    @PostMapping("/submit")
-    public String bookSubmit(){
-
-        return "redirect:/book/success";
-    }
-
-    @GetMapping("/success")
-    public String bookSuccessView(Model model){
-        return "book/success";
-    }
 }

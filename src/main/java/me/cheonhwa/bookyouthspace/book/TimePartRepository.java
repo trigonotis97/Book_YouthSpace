@@ -13,4 +13,10 @@ import java.util.Set;
 public interface TimePartRepository extends JpaRepository<TimePart,Long> {
 
     List<TimePart> findAllByDate(LocalDate date);
+
+    TimePart findByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+
+    int countByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+
+    List<TimePart> findAllByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
 }

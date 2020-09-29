@@ -10,6 +10,8 @@ import java.util.Set;
 @Entity
 @Builder @Getter @Setter @EqualsAndHashCode(of="id")
 @AllArgsConstructor @NoArgsConstructor
+//TODO : 제약조건 확인
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"date","timePart"})})
 public class TimePart {
 
     @Id
@@ -18,6 +20,7 @@ public class TimePart {
 
     //날짜
     @Column(nullable = false)
+
     private LocalDate date;
 
     //희망시간(타임파트 1~4)
@@ -25,7 +28,7 @@ public class TimePart {
     private int timePart;
 
     //최대예약인원
-    private int max;
+    private int maxPersonnel;
 
     @OneToMany
     private Set<Visitor> visitors = new HashSet<>();

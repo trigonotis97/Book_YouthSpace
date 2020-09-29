@@ -9,11 +9,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DayBookingPersonnel {
-    boolean isWeekend;
 
-    int maxPersonnel;
+    private boolean weekend;
 
-    List<Integer> personnel;
+    private int maxPersonnel;
+
+    private List<Integer> personnel;
 
 
 }
