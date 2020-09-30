@@ -12,11 +12,11 @@ import java.util.Set;
 @Transactional(readOnly =true)
 public interface TimePartRepository extends JpaRepository<TimePart,Long> {
 
-    List<TimePart> findAllByDate(LocalDate date);
+    List<TimePart> findAllByDate(String date);
 
-    TimePart findByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+    TimePart findByDateAndTimePart(String reservedDate, int reservedTimePart);
 
-    int countByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+    int countByDateAndTimePart(String reservedDate, int reservedTimePart);
 
-    List<TimePart> findAllByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+    List<TimePart> findAllByDateAndTimePart(String reservedDate, int reservedTimePart);
 }

@@ -38,8 +38,7 @@ public class BookController {
     @ResponseBody
     public Object getDayBookingStatus(@RequestParam String date){
         System.out.println(date);
-        LocalDate selectedDate=LocalDate.parse(date, DateTimeFormatter.ISO_DATE);
-        DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(selectedDate);
+        DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(date);
         System.out.println(dayBookingPersonnel.isWeekend());
         return dayBookingPersonnel;
     }

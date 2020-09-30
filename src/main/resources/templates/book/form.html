@@ -36,6 +36,19 @@
                         name Error
                     </small>
                 </div>
+                <!-- 패스워드 -->
+                <div class="form-group">
+                    <label for="password">패스워드</label>
+                    <input id="password" th:field="*{password}" name="password" type="password" class="form-control"
+                           aria-describedby="passwordHelp" required/>
+                    <small id="passwordHelp" class="text-muted form-text"  >패스워드는 예약 수정 및 삭제 시 사용됩니다.</small>
+                    <small class="invalid-feedback">이름을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+                        password Error
+                    </small>
+                </div>
+
+
                 <!-- 전화번호-->
                 <div class="form-group">
                     <label for="phoneNumber">전화번호</label>
@@ -166,12 +179,10 @@
                 </div>
                 -->
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기
+                    <button id="form-submit" class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기
                     </button>
                 </div>
             </form>
-            <button type="button" id="hidebtn">hide</button>
-            <button type="button" id="showbtn">show</button>
         </div>
     </div>
 </div>
@@ -236,15 +247,6 @@
                 }
             });
         }
-
-
-        $('#hidebtn').click(function () {
-            $('#time-part').hide();
-        });
-
-        $('#showbtn').click(function () {
-            $('#time-part').show();
-        });
 
         //TODO: submit 작동시(validation 후) 문공 컨텐츠 넣는 작업
 

@@ -13,6 +13,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
@@ -48,9 +49,10 @@ public class TimePartGenerator implements ApplicationRunner {
         }
         //이미 만들어진 레코드가 있는경우
         else {
-            counter= (int)ChronoUnit.DAYS.between(LocalDate.now(),lastUpdateTimePart.get().getDate());
+            LocalDate lastTimePartDate=LocalDate.parse(lastUpdateTimePart.get().getDate(), DateTimeFormatter.ISO_DATE);
+            counter= (int)ChronoUnit.DAYS.between(LocalDate.now(),lastTimePartDate);
             System.out.println("날짜 차이 : "+ counter);
-            countDate=lastUpdateTimePart.get().getDate().plusDays(1); counter++;
+            countDate=lastTimePartDate.plusDays(1); counter++;
             System.out.println("시작 날짜: "+ countDate);
         }
 
@@ -75,7 +77,7 @@ public class TimePartGenerator implements ApplicationRunner {
 
             for (int j = 1; j <= timePartCounter; j++) {
                 TimePart currentTimePart = TimePart.builder()
-                        .date(countDate)
+                        .date(countDate.toString())
                         .timePart(j)
                         .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
                         .build();

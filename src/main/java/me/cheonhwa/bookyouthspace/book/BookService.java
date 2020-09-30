@@ -20,7 +20,7 @@ public class BookService {
     private final TimePartRepository timePartRepository;
     private final VisitorRepository visitorRepository;
 
-    public DayBookingPersonnel getDayBookingPersonnel(LocalDate date) {
+    public DayBookingPersonnel getDayBookingPersonnel(String date) {
         int maxPersonnel;
         boolean isWeekend;
         List<Integer> bookingPersonnelList=new ArrayList<>();

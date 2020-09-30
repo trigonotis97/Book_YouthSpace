@@ -21,7 +21,7 @@ public class TimePart {
     //날짜
     @Column(nullable = false)
 
-    private LocalDate date;
+    private String date;
 
     //희망시간(타임파트 1~4)
     @Column(nullable = false)
