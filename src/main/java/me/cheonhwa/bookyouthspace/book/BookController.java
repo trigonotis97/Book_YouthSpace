@@ -49,7 +49,7 @@ public class BookController {
     @PostMapping("/submit")
     public String bookSubmit(Visitor visitor){
         //TODO : 해당 타임파트의 예약이 초과했을경우의 @Valid + validation 만들기 및 Errors
-        bookService.saveBooking(visitor);
+        bookService.saveBookingAndVisitor(visitor);
         return "redirect:/book/success";
     }
 

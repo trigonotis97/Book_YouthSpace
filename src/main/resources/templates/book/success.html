@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>문공 예약 성공</title>
+    <style th:replace="fragments.html :: head-style"></style>
 </head>
+<div th:replace="fragments.html :: head-src"></div>
 <body>
-
+    <div class="container main-container">
+        <div class="row">
+            <div class="col">
+                <br />
+                <br />
+                <p>
+                    문화공감 예약이 완료되었습니다.
+                </p>
+                <button type="button" class="btn btn-outline-danger btn-lg" onclick="location.href='/book/modify/login'">예약 수정</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="location.href='/book/form'">새로 예약 신청</button>
+                <button type="button" class="btn btn-outline-success btn-lg" onclick="location.href='/book/confirm'">예약 확인</button>
+                <button type="button" class="btn btn-info btn-lg" onclick="location.href='/'">홈으로 돌아가기</button>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
 </body>
 </html>

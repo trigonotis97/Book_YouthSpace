@@ -46,6 +46,6 @@ public class Visitor {
 
     //최종예약수정시간
     @Column(nullable = false)
-    private LocalDateTime reservationUpdateDateTime;
+    private String reservationUpdateDateTime;
 
 }
