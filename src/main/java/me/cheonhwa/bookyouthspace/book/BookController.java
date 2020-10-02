@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
@@ -27,7 +28,7 @@ public class BookController {
         model.addAttribute("visitor",new Visitor());
         model.addAttribute("mungongContents",new MunGongContent());
         model.addAttribute("contentNames",MunGongContent.getContentNamesToList());
-
+        model.addAttribute("isOverTime", LocalDateTime.now().getHour()>9);
         return "book/form";
     }
     

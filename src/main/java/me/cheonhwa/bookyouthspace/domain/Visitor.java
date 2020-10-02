@@ -41,8 +41,8 @@ public class Visitor {
     private int reservedTimePart;
 
     //이용하고싶은것
-
-    private String munGongContent;
+    @OneToOne
+    private Contents contentsToUse=new Contents();
 
     //최종예약수정시간
     @Column(nullable = false)

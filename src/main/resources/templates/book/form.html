@@ -26,7 +26,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <form class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" novalidate>
+            <form id="booking-form" class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" novalidate>
                 <!-- 이름 -->
                 <div class="form-group">
                     <label for="name">이름</label>
@@ -95,6 +95,7 @@
                 <!-- 예약 시간 -->
                 <div class="form-group" id="time-part" style="display: none">
                     <label for="timetable">예약 시간</label>
+                    <small class="text-muted form-text">예약은 일주일 전부터 당일 오전 9시까지만 가능합니다.</small>
                     <table class="table" id="timetable">
                         <thead>
                         <tr>
@@ -111,7 +112,7 @@
                             <td id="1-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="1"
+                                    <input id="1-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="1"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -123,7 +124,7 @@
                             <td id="2-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="2"
+                                    <input id="2-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="2"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -135,7 +136,7 @@
                             <td id="3-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="3"
+                                    <input id="3-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="3"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -147,7 +148,7 @@
                             <td id="4-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input type="radio" th:field="*{reservedTimePart}" th:value="4"
+                                    <input id="4-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="4"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -159,21 +160,57 @@
                 <!-- 이용 하고 싶은것 -->
                 <div class="form-group">
                     <label>이용하고 싶은것</label>
-                    <div th:block th:with="ind=${0}">
-                        <div th:each="contentName : ${contentNames}">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox"
-                                       th:field="${mungongContents.contents[__${contentNameStat.index}__]}"
-                                       th:value="true"/>
-                                <label class="form-check-label" th:text="${contentName}">
-                                    checkbox
-                                </label>
-                            </div>
-                        </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.computer}"/>
+                        <label class="form-check-label" th:text="${contentNames[0]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.pocketBall}"/>
+                        <label class="form-check-label" th:text="${contentNames[1]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.pingPong}"/>
+                        <label class="form-check-label" th:text="${contentNames[2]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.boardGame}"/>
+                        <label class="form-check-label" th:text="${contentNames[3]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.restArea}"/>
+                        <label class="form-check-label" th:text="${contentNames[4]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.photoZone}"/>
+                        <label class="form-check-label" th:text="${contentNames[5]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.ps4}"/>
+                        <label class="form-check-label" th:text="${contentNames[6]}">
+                            checkbox
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.arcadeConsole}"/>
+                        <label class="form-check-label" th:text="${contentNames[7]}">
+                            checkbox
+                        </label>
                     </div>
                 </div>
 
-                <!-- 최종 예약 수정 시간 : 클라이언트 타임존을 기준으로 저장되기 때문에 서버에서 따로 저장한다.
+                <!-- 최종 예약 수정 시간 : front에서 저장시 클라이언트 타임존을 기준으로 저장되기 때문에 back 에서 따로 저장한다.
                 <div class="form-group">
                     <input type="datetime-local" th:field="*{reservationUpdateDateTime}" th:value="">
                 </div>
@@ -224,10 +261,21 @@
                 contentType: "application/json; charset=utf-8;",
                 success: function (data) {
                     console.log(data);
+                    var isOverTime=[[${isOverTime}]];
+                    console.log(isOverTime);
                     if (!data.weekend) {
                         $('#4-time').show();
+                        $('#1-timePart-personnel').text(10-data.personnel[0]+"명 남음 ( "+data.personnel[0]+"명 예약중 )");
+                        $('#2-timePart-personnel').text(10-data.personnel[1]+"명 남음 ( "+data.personnel[1]+"명 예약중 )");
+                        $('#3-timePart-personnel').text(10-data.personnel[2]+"명 남음 ( "+data.personnel[2]+"명 예약중 )");
+                        $('#4-timePart-personnel').text(10-data.personnel[3]+"명 남음 ( "+data.personnel[3]+"명 예약중 )");
+
+                        $('#1-timePart-radio')
                     } else {
                         $('#4-time').hide();
+                        $('#1-timePart-personnel').text(10-data.personnel[0]+"명 남음 ( "+data.personnel[0]+"명 예약중 )");
+                        $('#2-timePart-personnel').text(10-data.personnel[1]+"명 남음 ( "+data.personnel[1]+"명 예약중 )");
+                        $('#3-timePart-personnel').text(10-data.personnel[2]+"명 남음 ( "+data.personnel[2]+"명 예약중 )");
                     }
                     console.log("data.personnel[0] : " + data.personnel[0]);
                     console.log("data.personnel[1] : " + data.personnel[1]);
@@ -248,13 +296,6 @@
 
             });
         }
-
-        $('#form-submit').click(function () {
-            ${}
-        })
-
-        //TODO: submit 작동시(validation 후) 문공 컨텐츠 넣는 작업
-
     });
 </script>
 

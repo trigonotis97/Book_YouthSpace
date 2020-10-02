@@ -21,6 +21,7 @@ public class BookService {
 
     private final TimePartRepository timePartRepository;
     private final VisitorRepository visitorRepository;
+    private final ContentsRepository contentsRepository;
 
     public DayBookingPersonnel getDayBookingPersonnel(String date) {
         int maxPersonnel;
@@ -44,7 +45,9 @@ public class BookService {
 
 
     public void saveBookingAndVisitor(Visitor visitor) {
-        //TODO : save visitor
+
+        contentsRepository.save(visitor.getContentsToUse());
+
         visitor.setReservationUpdateDateTime(LocalDateTime.now().toString());
         visitorRepository.save(visitor);
         System.out.println(visitor.toString());
