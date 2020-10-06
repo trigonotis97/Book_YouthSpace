@@ -8,7 +8,7 @@
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
-<div th:replace="fragments.html :: head-src"></div>
+<div th:replace="fragments.html :: head-link"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
         integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
         crossorigin="anonymous"></script>
@@ -20,16 +20,17 @@
         integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ=="
         crossorigin="anonymous"></script>
 <body class="bg-light">
-<p>
-    booking view
-</p>
 <div class="container">
     <div class="row">
         <div class="col">
-            <form id="booking-form" class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}" method="post" novalidate>
+            <h1 class="mt-3 text-center">💙꾸마 2층 문화공감💚
+                <br/>
+                온라인 예약 신청서 작성하기 </h1>
+            <form id="booking-form" class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}"
+                  method="post" novalidate>
                 <!-- 이름 -->
                 <div class="form-group">
-                    <label for="name">이름</label>
+                    <label for="name">🔸 이름</label>
                     <input id="name" th:field="*{name}" name="name" type="text" class="form-control" required/>
                     <small class="invalid-feedback">이름을 입력하세요.</small>
                     <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
@@ -38,10 +39,10 @@
                 </div>
                 <!-- 패스워드 -->
                 <div class="form-group">
-                    <label for="password">패스워드</label>
+                    <label for="password">🔸 패스워드</label>
                     <input id="password" th:field="*{password}" name="password" type="password" class="form-control"
                            aria-describedby="passwordHelp" required/>
-                    <small id="passwordHelp" class="text-muted form-text"  >패스워드는 예약 수정 및 삭제 시 사용됩니다.</small>
+                    <small id="passwordHelp" class="text-muted form-text">패스워드는 예약 수정 및 삭제 시 사용됩니다.</small>
                     <small class="invalid-feedback">이름을 입력하세요.</small>
                     <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
                         password Error
@@ -51,7 +52,7 @@
 
                 <!-- 전화번호-->
                 <div class="form-group">
-                    <label for="phoneNumber">전화번호</label>
+                    <label for="phoneNumber">🔸 전화번호</label>
                     <input id="phoneNumber" th:field="*{phoneNumber}" name="phoneNumber" type="text"
                            class="form-control"
                            placeholder="010-0000-0000" aria-describedby="phoneNumberHelp" required
@@ -65,7 +66,7 @@
                 </div>
                 <!-- 나이-->
                 <div class="form-group">
-                    <label for="age">나이</label>
+                    <label for="age">🔸 나이</label>
                     <input id="age" th:field="*{age}" name="age" type="text" class="form-control" pattern="[0-9]{1,2}"
                            required/>
                     <small class="invalid-feedback">올바른 나이를 입력해주세요</small>
@@ -74,7 +75,7 @@
                 </div>
                 <!-- 성별 -->
                 <div class="form-group">
-                    <label>성별</label>
+                    <label>🔸 성별</label>
                     <div th:each="gender : ${T(me.cheonhwa.bookyouthspace.domain.Gender).values()}">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" th:field="*{gender}" th:value="${gender}" class="custom-control-input"
@@ -87,14 +88,14 @@
 
                 <!-- 예약 날짜 -->
                 <div class="form-group">
-                    <label for="calender">예약 날짜</label>
+                    <label for="calender">🔸 예약 날짜</label>
                     <input id="calender" type="text" th:field="*{reservedDate}" class="form-control"
                            placeholder="여기를 눌러 날짜를 선택하세요" required/>
                     <small class="invalid-feedback">예약 날짜를 선택해 주세요</small>
                 </div>
                 <!-- 예약 시간 -->
                 <div class="form-group" id="time-part" style="display: none">
-                    <label for="timetable">예약 시간</label>
+                    <label for="timetable">💙 예약 시간</label>
                     <small class="text-muted form-text">예약은 일주일 전부터 당일 오전 9시까지만 가능합니다.</small>
                     <table class="table" id="timetable">
                         <thead>
@@ -108,11 +109,12 @@
                         <tbody>
                         <tr>
                             <th scope="row">1타임</th>
-                            <td>10:00 ~ 12:00</td>
+                            <td>오전10:00 ~ 12:00</td>
                             <td id="1-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input id="1-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="1"
+                                    <input id="1-timePart-radio" type="radio" th:field="*{reservedTimePart}"
+                                           th:value="1"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -120,11 +122,12 @@
                         </tr>
                         <tr>
                             <th scope="row">2타임</th>
-                            <td>12:30 ~ 14:30</td>
+                            <td>낮12:30 ~ 오후2:30</td>
                             <td id="2-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input id="2-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="2"
+                                    <input id="2-timePart-radio" type="radio" th:field="*{reservedTimePart}"
+                                           th:value="2"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -132,11 +135,12 @@
                         </tr>
                         <tr>
                             <th scope="row">3타임</th>
-                            <td>15:00 ~ 17:00</td>
+                            <td>오후3:00 ~ 5:00</td>
                             <td id="3-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input id="3-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="3"
+                                    <input id="3-timePart-radio" type="radio" th:field="*{reservedTimePart}"
+                                           th:value="3"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -144,11 +148,12 @@
                         </tr>
                         <tr id="4-time" style="display: none">
                             <th scope="row">4타임</th>
-                            <td>17:30 ~ 19:30</td>
+                            <td>오후5:30 ~ 7:30</td>
                             <td id="4-timePart-personnel">-1</td>
                             <td>
                                 <div class="form-check">
-                                    <input id="4-timePart-radio" type="radio" th:field="*{reservedTimePart}" th:value="4"
+                                    <input id="4-timePart-radio" type="radio" th:field="*{reservedTimePart}"
+                                           th:value="4"
                                            class="form-check-input" required/>
                                     <small class="invalid-feedback">예약시간을 선택해 주세요</small>
                                 </div>
@@ -159,7 +164,7 @@
                 </div>
                 <!-- 이용 하고 싶은것 -->
                 <div class="form-group">
-                    <label>이용하고 싶은것</label>
+                    <label>🔸 이용하고 싶은것</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" th:field="*{contentsToUse.computer}"/>
                         <label class="form-check-label" th:text="${contentNames[0]}">
@@ -216,12 +221,14 @@
                 </div>
                 -->
                 <div class="form-group">
-                    <button id="form-submit" class="btn btn-primary btn-block" type="submit" aria-describedby="submitHelp">예약하기
+                    <button id="form-submit" class="btn btn-primary btn-block" type="submit"
+                            aria-describedby="submitHelp">👩 예약하기 🧑
                     </button>
                 </div>
             </form>
         </div>
     </div>
+    <div th:replace="fragments.html :: help-message"></div>
 </div>
 
 </body>
@@ -261,21 +268,21 @@
                 contentType: "application/json; charset=utf-8;",
                 success: function (data) {
                     console.log(data);
-                    var isOverTime=[[${isOverTime}]];
+                    var isOverTime = [[${isOverTime}]];
                     console.log(isOverTime);
                     if (!data.weekend) {
                         $('#4-time').show();
-                        $('#1-timePart-personnel').text(10-data.personnel[0]+"명 남음 ( "+data.personnel[0]+"명 예약중 )");
-                        $('#2-timePart-personnel').text(10-data.personnel[1]+"명 남음 ( "+data.personnel[1]+"명 예약중 )");
-                        $('#3-timePart-personnel').text(10-data.personnel[2]+"명 남음 ( "+data.personnel[2]+"명 예약중 )");
-                        $('#4-timePart-personnel').text(10-data.personnel[3]+"명 남음 ( "+data.personnel[3]+"명 예약중 )");
+                        $('#1-timePart-personnel').text(10 - data.personnel[0] + "명 남음 ( " + data.personnel[0] + "명 예약중 )");
+                        $('#2-timePart-personnel').text(10 - data.personnel[1] + "명 남음 ( " + data.personnel[1] + "명 예약중 )");
+                        $('#3-timePart-personnel').text(10 - data.personnel[2] + "명 남음 ( " + data.personnel[2] + "명 예약중 )");
+                        $('#4-timePart-personnel').text(10 - data.personnel[3] + "명 남음 ( " + data.personnel[3] + "명 예약중 )");
 
                         $('#1-timePart-radio')
                     } else {
                         $('#4-time').hide();
-                        $('#1-timePart-personnel').text(10-data.personnel[0]+"명 남음 ( "+data.personnel[0]+"명 예약중 )");
-                        $('#2-timePart-personnel').text(10-data.personnel[1]+"명 남음 ( "+data.personnel[1]+"명 예약중 )");
-                        $('#3-timePart-personnel').text(10-data.personnel[2]+"명 남음 ( "+data.personnel[2]+"명 예약중 )");
+                        $('#1-timePart-personnel').text(10 - data.personnel[0] + "명 남음 ( " + data.personnel[0] + "명 예약중 )");
+                        $('#2-timePart-personnel').text(10 - data.personnel[1] + "명 남음 ( " + data.personnel[1] + "명 예약중 )");
+                        $('#3-timePart-personnel').text(10 - data.personnel[2] + "명 남음 ( " + data.personnel[2] + "명 예약중 )");
                     }
                     console.log("data.personnel[0] : " + data.personnel[0]);
                     console.log("data.personnel[1] : " + data.personnel[1]);

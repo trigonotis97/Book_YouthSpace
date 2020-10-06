@@ -4,7 +4,7 @@
 <head th:fragment="head">
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,6 +14,7 @@
             max-width: 100%;
             font-family: 'Noto Sans KR', sans-serif;
         }
+
         .main-container {
             text-align: center;
 
@@ -26,17 +27,17 @@
         max-width: 100%;
         font-family: 'Noto Sans KR', sans-serif;
     }
+
     .main-container {
         text-align: center;
 
     }
 
 
-
 </style>
-<div th:fragment="head-src">
+<div th:fragment="head-link">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -47,19 +48,19 @@
     (function () {
         'use strict';
 
-        window.addEventListener('load',function () {
-            var forms=document.getElementsByClassName('needs-validation');
+        window.addEventListener('load', function () {
+            var forms = document.getElementsByClassName('needs-validation');
 
             Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit',function (event) {
-                    if(form.checkValidity()===false) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();
                     }
                     form.classList.add('was-validated')
-                },false)
+                }, false)
             })
-        },false)
+        }, false)
     }())
 </script>
 <script th:fragment="ajax-csrf">
@@ -67,8 +68,22 @@
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
 
-        $(document).ajaxSend(function(e, xhr, options) {
+        $(document).ajaxSend(function (e, xhr, options) {
             xhr.setRequestHeader(header, token);
         });
     });
 </script>
+<div th:fragment="help-message">
+    <div class="row ">
+        <div class="col">
+            <small> 💜 온라인 예약이 안될때 전화예약 : 070-4991-4582</small>
+            <br/>
+            <small class="text-muted mb-5">
+                전화 걸고 "안녕하세요 2층 문화공감 예약하고싶어서 전화했어요~" 라고 한 후
+                <br/>
+                이름, 나이, 전화번호,예약하고싶은 날짜, 예약하고싶은 시간 말하면 끝!
+            </small>
+            <hr/>
+        </div>
+    </div>
+</div>
