@@ -1,10 +1,9 @@
 package me.cheonhwa.bookyouthspace.book;
 
 import lombok.RequiredArgsConstructor;
-import me.cheonhwa.bookyouthspace.domain.DayBookingPersonnel;
-import me.cheonhwa.bookyouthspace.domain.SystemData;
-import me.cheonhwa.bookyouthspace.domain.TimePart;
-import me.cheonhwa.bookyouthspace.domain.Visitor;
+import me.cheonhwa.bookyouthspace.domain.*;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,12 +22,14 @@ public class BookService {
     private final VisitorRepository visitorRepository;
     private final ContentsRepository contentsRepository;
 
+    private final ModelMapper modelMapper;
+
     public DayBookingPersonnel getDayBookingPersonnel(String date) {
         int maxPersonnel;
         boolean isWeekend;
+        LocalDate localDate = LocalDate.parse(date);
         List<Integer> bookingPersonnelList=new ArrayList<>();
-
-        List<TimePart> dayTimeParts=timePartRepository.findAllByDate(date);
+        List<TimePart> dayTimeParts=timePartRepository.findAllByDate(localDate);
 
         isWeekend=dayTimeParts.size()==3;
         maxPersonnel=dayTimeParts.get(0).getMaxPersonnel();
@@ -54,5 +55,12 @@ public class BookService {
         //TODO : add timepart visitors
         TimePart byDateAndTimePart = timePartRepository.findByDateAndTimePart(visitor.getReservedDate(),visitor.getReservedTimePart());
         byDateAndTimePart.getVisitors().add(visitor);
+    }
+
+
+    public Visitor mappingVisitorForm(VisitorForm visitorForm) {
+        Visitor newVisitor =new Visitor();
+        modelMapper.map(visitorForm,newVisitor);
+        return newVisitor;
     }
 }

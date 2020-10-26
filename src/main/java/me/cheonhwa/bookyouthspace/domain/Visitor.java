@@ -34,7 +34,7 @@ public class Visitor {
 
     //날짜
     @Column(nullable = false)
-    private String reservedDate;
+    private LocalDate reservedDate;
 
     //희망시간
     @Column(nullable = false)

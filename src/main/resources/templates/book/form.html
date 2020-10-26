@@ -27,7 +27,7 @@
                 <br/>
                 온라인 예약 신청서 작성하기 </h1>
             <form id="booking-form" class="needs-validation" th:action="@{/book/submit}" th:object="${visitor}"
-                  method="post" novalidate>
+                  method="post"  novalidate>
                 <!-- 이름 -->
                 <div class="form-group">
                     <label for="name">🔸 이름</label>
@@ -253,7 +253,6 @@
             autoclose: true,
 
         }).on("changeDate", function () {
-            alert("select  datepicker TODO : 날짜에 대한 예약인원 정보 가져오기");
             getTimePartData();
         });
 

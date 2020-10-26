@@ -28,7 +28,8 @@ public class TimePartGenerator implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("ApplicationRunner is now Driven");
+        System.out.println("💙 ApplicationRunner is now Driven");
+        System.out.println("💙 generateTimePartRecord");
         generateTimePartRecord();
     }
 
@@ -49,7 +50,8 @@ public class TimePartGenerator implements ApplicationRunner {
         }
         //이미 만들어진 레코드가 있는경우
         else {
-            LocalDate lastTimePartDate=LocalDate.parse(lastUpdateTimePart.get().getDate(), DateTimeFormatter.ISO_DATE);
+            //LocalDate lastTimePartDate=LocalDate.parse(lastUpdateTimePart.get().getDate(), DateTimeFormatter.ISO_DATE);
+            LocalDate lastTimePartDate=lastUpdateTimePart.orElseThrow().getDate();
             counter= (int)ChronoUnit.DAYS.between(LocalDate.now(),lastTimePartDate);
             System.out.println("날짜 차이 : "+ counter);
             countDate=lastTimePartDate.plusDays(1); counter++;
@@ -77,7 +79,7 @@ public class TimePartGenerator implements ApplicationRunner {
 
             for (int j = 1; j <= timePartCounter; j++) {
                 TimePart currentTimePart = TimePart.builder()
-                        .date(countDate.toString())
+                        .date(countDate)
                         .timePart(j)
                         .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
                         .build();

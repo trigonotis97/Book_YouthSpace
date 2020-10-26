@@ -10,6 +10,8 @@ import java.util.Set;
 @Entity
 @Builder @Getter @Setter @EqualsAndHashCode(of="id")
 @AllArgsConstructor @NoArgsConstructor
+
+
 //TODO : 제약조건 확인
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"date","timePart"})})
 public class TimePart {
@@ -21,7 +23,7 @@ public class TimePart {
     //날짜
     @Column(nullable = false)
 
-    private String date;
+    private LocalDate date;
 
     //희망시간(타임파트 1~4)
     @Column(nullable = false)

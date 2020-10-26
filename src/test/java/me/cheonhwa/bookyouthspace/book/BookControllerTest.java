@@ -37,7 +37,7 @@ class BookControllerTest {
             .age(25)
             .gender(Gender.FEMALE)
             .name("김천화")
-            .reservedDate(LocalDate.now().toString())
+            .reservedDate(LocalDate.now())
             .reservedTimePart(3)
             .build();
 
