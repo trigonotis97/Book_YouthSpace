@@ -8,11 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.ui.ModelMap;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @WebAppConfiguration
@@ -24,7 +23,7 @@ class BookServiceTest {
 
 
     @Test
-    void testTypemap() throws Exception{
+    void testTypeMap() throws Exception{
 
         Visitor newVisitor =new Visitor();
         VisitorForm visitorForm=VisitorForm.builder().age(23).name("김천화").gender(Gender.FEMALE).reservedDate("2020-10-26").password("pass").build();

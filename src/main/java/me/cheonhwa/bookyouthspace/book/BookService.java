@@ -3,7 +3,6 @@ package me.cheonhwa.bookyouthspace.book;
 import lombok.RequiredArgsConstructor;
 import me.cheonhwa.bookyouthspace.domain.*;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,23 +22,24 @@ public class BookService {
 
     private final ModelMapper modelMapper;
 
-    public DayBookingPersonnel getDayBookingPersonnel(String date) {
+    public DayTimePart getDayTimePart(String date) {
         int maxPersonnel;
         boolean isWeekend;
         LocalDate localDate = LocalDate.parse(date);
-        List<Integer> bookingPersonnelList=new ArrayList<>();
+        List<Integer> dayTimePartList=new ArrayList<>();
+
         List<TimePart> dayTimeParts=timePartRepository.findAllByDate(localDate);
 
         isWeekend=dayTimeParts.size()==3;
         maxPersonnel=dayTimeParts.get(0).getMaxPersonnel();
-        for (int i = 0; i <dayTimeParts.size() ; i++) {
-            bookingPersonnelList.add(dayTimeParts.get(i).getVisitors().size());
+        for (TimePart dayTimePart : dayTimeParts) {
+            dayTimePartList.add(dayTimePart.getVisitors().size());
         }
 
-        return DayBookingPersonnel.builder()
+        return DayTimePart.builder()
                 .weekend(isWeekend)
                 .maxPersonnel(maxPersonnel)
-                .personnel(bookingPersonnelList)
+                .personnel(dayTimePartList)
                 .build();
     }
 

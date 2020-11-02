@@ -1,20 +1,16 @@
 package me.cheonhwa.bookyouthspace.book;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import me.cheonhwa.bookyouthspace.domain.*;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
-import org.springframework.data.repository.query.Param;
+import me.cheonhwa.bookyouthspace.domain.DayTimePart;
+import me.cheonhwa.bookyouthspace.domain.MunGongContent;
+import me.cheonhwa.bookyouthspace.domain.Visitor;
+import me.cheonhwa.bookyouthspace.domain.VisitorForm;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,9 +37,9 @@ public class BookController {
     @ResponseBody
     public Object getDayBookingStatus(@RequestParam String date){
         System.out.println(date);
-        DayBookingPersonnel dayBookingPersonnel=bookService.getDayBookingPersonnel(date);
-        System.out.println(dayBookingPersonnel.isWeekend());
-        return dayBookingPersonnel;
+        DayTimePart dayTimePart =bookService.getDayTimePart(date);
+        System.out.println(dayTimePart.isWeekend());
+        return dayTimePart;
     }
 
 

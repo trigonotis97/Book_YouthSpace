@@ -18,5 +18,5 @@ public interface TimePartRepository extends JpaRepository<TimePart,Long> {
 
     int countByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
 
-    List<TimePart> findAllByDateAndTimePart(LocalDate reservedDate, int reservedTimePart);
+
 }

@@ -51,7 +51,7 @@ class BookControllerTest {
     void saveVisitorToTimePartRepo() throws Exception {
         //timePartRepository.findByDateAndTimePart(testVisitor.getReservedDate(),testVisitor.getReservedTimePart());
         int count=timePartRepository.countByDateAndTimePart(testVisitor.getReservedDate(),testVisitor.getReservedTimePart());
-        List<TimePart> timePartList=timePartRepository.findAllByDateAndTimePart(testVisitor.getReservedDate(),testVisitor.getReservedTimePart());
+
         assertEquals(count,1);
     }
 

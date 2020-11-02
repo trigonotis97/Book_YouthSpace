@@ -1,8 +1,6 @@
 package me.cheonhwa.bookyouthspace.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of ="id")
+@Builder @NoArgsConstructor  @AllArgsConstructor
 public class Admin {
 
     @Id @GeneratedValue
@@ -19,6 +18,7 @@ public class Admin {
     @Column(unique = true)
     private String nickname;
 
-    @Column(nullable = false)
+
     private String password;
+
 }

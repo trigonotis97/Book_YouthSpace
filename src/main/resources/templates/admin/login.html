@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>관리자 로그인</title>
+    <title>관리자 페이지</title>
+    <style th:replace="fragments.html :: head-style"></style>
+
 </head>
-<body>
-    관리자 로그인창
+<div th:replace="fragments.html :: head-link"></div>
+<body class="bg-light">
+<div class="container ">
+    <div class="row">
+        <div class="col text-center">
+            <button type="button" class="btn btn-info btn-lg mt-5 " onclick="location.href='/'">홈으로 돌아가기</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="py-5 text-center col">
+            <p class="lead">문화공감예약 관리자 페이지</p>
+            <h2>로그인</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <form class="col-sm-6" action="#" th:action="@{/admin/status}">
+            <div class="form-group">
+                <label for="nickname">💜 닉네임</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="꾸마애칭" aria-describedby="nicknameHelp" required>
+                <small id="nicknameHelp" class="form-text text-muted">
+                    꾸마 애칭을 한글로 입력해주세요.
+                </small>
+                <small class="invalid-feedback">닉네임을 입력하세요.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">💜 비밀번호</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <small class="invalid-feedback">비밀번호를 입력하세요</small>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me" checked>
+                <label class="form-check-label" for="rememberMe" aria-describedby="rememberMeHelp">로그인 유지</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success btn-block" type="submit"
+                        aria-describedby="submitHelp">로그인</button>
+                <small id="submitHelp" class="form-text text-muted">
+                    관리자 계정을 모를경우 문화공감 담당자나 연수생 "룰루" 에게 연락주세요.
+                </small>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
