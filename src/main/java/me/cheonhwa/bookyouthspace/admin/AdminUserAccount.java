@@ -13,7 +13,7 @@ public class AdminUserAccount extends User {
     private Admin admin;
 
     public AdminUserAccount(Admin admin) {
-        super(admin.getNickname(), admin.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        super(admin.getUsername(), admin.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
         this.admin = admin;
     }
 }

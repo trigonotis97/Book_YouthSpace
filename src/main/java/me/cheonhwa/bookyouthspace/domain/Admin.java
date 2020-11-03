@@ -16,7 +16,7 @@ public class Admin {
     private Long id;
 
     @Column(unique = true)
-    private String nickname;
+    private String username;
 
 
     private String password;

@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
 public interface AdminRepository  extends JpaRepository <Admin ,Long> {
-    Admin findByNickname(String nickname);
+    Admin findByUsername(String nickname);
 }
