@@ -8,16 +8,34 @@
 
 </head>
 <div th:replace="fragments.html :: head-link"></div>
-<body class="bg-light">
-<div class="container main-container">
+<body style="background: rgba(123,46,255,0.23) ">
+<div class="container">
+    <div class="text-center">
+        <h1 class="pt-5">👩문공 예약 현황 관리자 페이지🧑</h1>
+        <br/>
+        <button type="button" class="btn btn-primary btn-lg" onclick="location.href='/book/form'">예약 신청 하기</button>
+        <button type="button" class="btn btn-outline-danger btn-lg" onclick="location.href='/book/modify/login'">예약 수정
+        </button>
+        <button type="button" class="btn btn-outline-success btn-lg" onclick="location.href='/book/status'">예약 확인
+        </button>
+        <button type="button" class="btn btn-info btn-lg" onclick="location.href='/'">홈으로 돌아가기</button>
+        <hr/>
+    </div>
+    <div class="row">
+            
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="m-0 p-0">김룰루</p>
+                        <small class="text-muted">(010-4505-7196)</small>
+                    </div>
+                </a>
 
-    <h1 class="pt-5">👩문공 예약 현황 관리자 페이지🧑</h1>
-    <br/>
-    <button type="button" class="btn btn-primary btn-lg" onclick="location.href='/book/form'">예약 신청 하기</button>
-    <button type="button" class="btn btn-outline-danger btn-lg" onclick="location.href='/book/modify/login'">예약 수정</button>
-    <button type="button" class="btn btn-outline-success btn-lg" onclick="location.href='/book/status'">예약 확인</button>
-    <button type="button" class="btn btn-info btn-lg" onclick="location.href='/'">홈으로 돌아가기</button>
-    <hr/>
+            </div>
+
+    </div>
+
+
     <!--
     <div class="row">
         <ul class="list-group px-1">

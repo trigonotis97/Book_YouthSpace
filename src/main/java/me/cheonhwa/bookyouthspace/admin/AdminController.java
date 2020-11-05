@@ -3,6 +3,7 @@ package me.cheonhwa.bookyouthspace.admin;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,10 @@ public class AdminController {
     }
 
     @GetMapping("/status")
-    public String adminView(){
+    public String adminView(Model model){
+        //이번주 예약 명단 보여주기
+
+        
         return "admin/status";
     }
 

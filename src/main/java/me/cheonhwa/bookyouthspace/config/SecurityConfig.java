@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.formLogin()
-                .loginPage("/admin/login").permitAll();
+                .loginPage("/admin/login").permitAll()
+                .defaultSuccessUrl("/admin/status");
         http.logout()
                 .logoutSuccessUrl("/");
         http.rememberMe()
