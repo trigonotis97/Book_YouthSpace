@@ -52,6 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         //super.configure(web);
         web.ignoring()
+                .antMatchers("/favicon.ico", "/resources/**", "/error")
                 .mvcMatchers("/node_modules/**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
