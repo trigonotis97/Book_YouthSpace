@@ -2,6 +2,7 @@ package me.cheonhwa.bookyouthspace.domain;
 
 import lombok.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,7 @@ public class DayTimePart {
 
     private List<Integer> personnel = new ArrayList<>();
 
-    //관리자 페이지에서 사용?
-    private List<TimePart> timePartList = new ArrayList<>();
+    private List<TimePart> timePartList =new ArrayList<>();
 
 
 }

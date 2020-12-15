@@ -14,5 +14,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/bookspacedb</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="postgres@bookspace-postgres-rds-2" uuid="3b02da54-1eb2-4d5a-a261-21540f22d972">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://bookspace-postgres-rds-2.chnivmdp6lhj.ap-northeast-2.rds.amazonaws.com:5432/bookspace_springweb</jdbc-url>
+    </data-source>
   </component>
 </project>

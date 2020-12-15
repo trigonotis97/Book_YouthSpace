@@ -1,6 +1,7 @@
-package me.cheonhwa.bookyouthspace.book;
+package me.cheonhwa.bookyouthspace.timepart;
 
 import lombok.RequiredArgsConstructor;
+import me.cheonhwa.bookyouthspace.book.TimePartRepository;
 import me.cheonhwa.bookyouthspace.domain.SystemData;
 import me.cheonhwa.bookyouthspace.domain.TimePart;
 import org.springframework.boot.ApplicationArguments;

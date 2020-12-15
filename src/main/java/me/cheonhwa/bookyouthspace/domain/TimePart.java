@@ -29,6 +29,7 @@ public class TimePart {
     @Column(nullable = false)
     private int timePart;
 
+    //TODO: 상위 엔티티로 빼내기
     //최대예약인원
     private int maxPersonnel;
 
