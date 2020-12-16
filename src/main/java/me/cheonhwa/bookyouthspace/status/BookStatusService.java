@@ -19,9 +19,7 @@ public class BookStatusService {
 
     private final TimePartService timePartService;
 
-    public List<DayTimePart> getWeekDayTimePart() {
 
-    }
 
 
 

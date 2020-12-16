@@ -2,16 +2,24 @@ package me.cheonhwa.bookyouthspace.domain;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class DayTimePart {
+
+    @Id @GeneratedValue
+    private Long id;
 
     private LocalDate date;
 
@@ -19,8 +27,7 @@ public class DayTimePart {
 
     private int maxPersonnel;
 
-    private List<Integer> personnel = new ArrayList<>();
-
+    @OneToMany
     private List<TimePart> timePartList =new ArrayList<>();
 
 

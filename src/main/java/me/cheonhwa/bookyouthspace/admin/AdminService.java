@@ -55,7 +55,7 @@ public class AdminService implements UserDetailsService, ApplicationRunner {
     private boolean isWeekend(LocalDate date){
         return date.getDayOfWeek()==DayOfWeek.SUNDAY || date.getDayOfWeek()== DayOfWeek.SATURDAY;
     }
-
+    /*
     private List<DayTimePart> getWeekDayTimePart(int week){
         List<DayReservation> weekTimePart =new ArrayList<>();
         for (int i = week==1? 0:7; i < (week==1? 7 : 14); i++) {
@@ -72,7 +72,7 @@ public class AdminService implements UserDetailsService, ApplicationRunner {
         }
         return weekTimePart;
     }
-
+*/
 
     public List<DayTimePart> getWeekBookingData() {
         List<DayTimePart> dayTimePartList= new ArrayList<>();

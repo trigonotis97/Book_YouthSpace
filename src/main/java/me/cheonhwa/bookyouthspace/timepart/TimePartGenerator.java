@@ -2,6 +2,7 @@ package me.cheonhwa.bookyouthspace.timepart;
 
 import lombok.RequiredArgsConstructor;
 import me.cheonhwa.bookyouthspace.book.TimePartRepository;
+import me.cheonhwa.bookyouthspace.domain.DayTimePart;
 import me.cheonhwa.bookyouthspace.domain.SystemData;
 import me.cheonhwa.bookyouthspace.domain.TimePart;
 import org.springframework.boot.ApplicationArguments;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,11 +29,14 @@ public class TimePartGenerator implements ApplicationRunner {
     private LocalDateTime lastGenerateTime;
     private final TimePartRepository timePartRepository;
 
+    private final DayTimePartRepository dayTimePartRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("💙 ApplicationRunner is now Driven");
         System.out.println("💙 generateTimePartRecord");
         generateTimePartRecord();
+
     }
 
     //매주 월요일 1시 실행
@@ -82,11 +87,19 @@ public class TimePartGenerator implements ApplicationRunner {
                 TimePart currentTimePart = TimePart.builder()
                         .date(countDate)
                         .timePart(j)
-                        .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
+                        .personnel(0)
                         .build();
                 timePartRepository.save(currentTimePart);
 
             }
+            List<TimePart> currentTimePartList= timePartRepository.findAllByDate(countDate);
+            DayTimePart currentDayTimePart = DayTimePart.builder()
+                    .date(countDate)
+                    .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
+                    .timePartList(currentTimePartList)
+                    .weekend(timePartCounter ==3)
+                    .build();
+            dayTimePartRepository.save(currentDayTimePart);
             System.out.println(counter+"회차 "+"레코드 기록 날짜 : " + countDate);
 
         }
@@ -94,10 +107,13 @@ public class TimePartGenerator implements ApplicationRunner {
 
 
         lastGenerateTime=LocalDateTime.now();
+
         System.out.println(" Init TimePart Record ( 2 week ) ");
     }
 
-
+    public LocalDateTime getLastGenerateTime() {
+        return lastGenerateTime;
+    }
     /*
     @Scheduled(cron = "* * * * * *")
     private void sampletestGenerateTimePart(){

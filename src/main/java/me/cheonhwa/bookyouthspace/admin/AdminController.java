@@ -32,7 +32,7 @@ public class AdminController {
     @GetMapping("/status")
     public String adminView(Model model){
         //이번주 예약 명단 보여주기
-        model.addAttribute("week", timePartService.getWeekBookingDataForAdmin());
+        model.addAttribute("week", timePartService.getWeekDayTimePart());
         //페이징
 
 

@@ -5,6 +5,7 @@ import me.cheonhwa.bookyouthspace.domain.DayTimePart;
 import me.cheonhwa.bookyouthspace.domain.MunGongContent;
 import me.cheonhwa.bookyouthspace.domain.Visitor;
 import me.cheonhwa.bookyouthspace.domain.VisitorForm;
+import me.cheonhwa.bookyouthspace.timepart.DayTimePartRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 public class BookController {
 
     private final BookService bookService;
+    private final DayTimePartRepository dayTimePartRepository;
 
 
     @GetMapping("/form")

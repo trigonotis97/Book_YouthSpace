@@ -31,9 +31,14 @@ public class TimePart {
 
     //TODO: 상위 엔티티로 빼내기
     //최대예약인원
-    private int maxPersonnel;
-
+//    private int maxPersonnel;
+    private int personnel;
     @OneToMany
     private Set<Visitor> visitors = new HashSet<>();
+
+    public void addVisitor(Visitor  visitor){
+        this.visitors.add(visitor);
+        this.personnel++;
+    }
 
 }

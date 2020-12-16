@@ -267,32 +267,24 @@
                 contentType: "application/json; charset=utf-8;",
                 success: function (data) {
                     console.log(data);
-                    var isOverTime = [[${isOverTime}]];
-                    console.log(isOverTime);
+                    // var isOverTime = [[${isOverTime}]];
+                    // console.log(isOverTime);
                     if (!data.weekend) {
                         $('#4-time').show();
-                        $('#1-timePart-personnel').text(10 - data.personnel[0] + "명 남음 ( " + data.personnel[0] + "명 예약중 )");
-                        $('#2-timePart-personnel').text(10 - data.personnel[1] + "명 남음 ( " + data.personnel[1] + "명 예약중 )");
-                        $('#3-timePart-personnel').text(10 - data.personnel[2] + "명 남음 ( " + data.personnel[2] + "명 예약중 )");
-                        $('#4-timePart-personnel').text(10 - data.personnel[3] + "명 남음 ( " + data.personnel[3] + "명 예약중 )");
+                        $('#1-timePart-personnel').text(10 - data.timePartList[0].personnel + "명 남음 ( " + data.timePartList[0].personnel + "명 예약중 )");
+                        $('#2-timePart-personnel').text(10 - data.timePartList[1].personnel + "명 남음 ( " + data.timePartList[1].personnel + "명 예약중 )");
+                        $('#3-timePart-personnel').text(10 - data.timePartList[2].personnel + "명 남음 ( " + data.timePartList[2].personnel + "명 예약중 )");
+                        $('#4-timePart-personnel').text(10 - data.timePartList[3].personnel + "명 남음 ( " + data.timePartList[3].personnel + "명 예약중 )");
 
                         $('#1-timePart-radio')
                     } else {
                         $('#4-time').hide();
-                        $('#1-timePart-personnel').text(10 - data.personnel[0] + "명 남음 ( " + data.personnel[0] + "명 예약중 )");
-                        $('#2-timePart-personnel').text(10 - data.personnel[1] + "명 남음 ( " + data.personnel[1] + "명 예약중 )");
-                        $('#3-timePart-personnel').text(10 - data.personnel[2] + "명 남음 ( " + data.personnel[2] + "명 예약중 )");
+                        $('#1-timePart-personnel').text(10 - data.timePartList[0].personnel + "명 남음 ( " + data.timePartList[0].personnel + "명 예약중 )");
+                        $('#2-timePart-personnel').text(10 - data.timePartList[1].personnel + "명 남음 ( " + data.timePartList[1].personnel + "명 예약중 )");
+                        $('#3-timePart-personnel').text(10 - data.timePartList[2].personnel + "명 남음 ( " + data.timePartList[2].personnel + "명 예약중 )");
                     }
-                    console.log("data.personnel[0] : " + data.personnel[0]);
-                    console.log("data.personnel[1] : " + data.personnel[1]);
-                    console.log("data.personnel[2] : " + data.personnel[2]);
-                    console.log("data.weekend : " + data.weekend);
-                    $.each(data.personnel, function (idx, val) {
-                        console.log("data.personnel [" + idx + "] " + val);
-                    });
-                    $.each(data, function (idx, val) {
-                        console.log("data [" + idx + "] " + val);
-                    })
+
+
                     $('#time-part').show();
 
                 },

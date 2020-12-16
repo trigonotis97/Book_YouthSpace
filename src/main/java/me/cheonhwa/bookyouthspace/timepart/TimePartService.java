@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TimePartService {
     private final TimePartRepository timePartRepository;
+    private final DayTimePartRepository dayTimePartRepository;
 
     private static List<String> dayOfTwoWeek = new ArrayList<>();
 
@@ -36,39 +37,43 @@ public class TimePartService {
 
 
     //TODO :  personnel db캐싱하기.
+    //2주치 리스트에 1주분량(최대예약기간만 나가야한다.)
     public List<DayTimePart> getWeekDayTimePart() {
         List<DayTimePart> dayTimePartList = new ArrayList<>();
+
+
+
 
         LocalDate dateCounter = findThisSunday();
         LocalDate end2week=dateCounter.plusWeeks(2);
         for (; dateCounter.isBefore(end2week); dateCounter=dateCounter.plusDays(1)) {
             DayTimePart dayTimePart=new DayTimePart();
 
-            dayTimePart.setDate(dateCounter);
-            dayTimePart.setWeekend(dateCounter.getDayOfWeek() == DayOfWeek.SUNDAY || dateCounter.getDayOfWeek() == DayOfWeek.SATURDAY);
+            //
 
-            List<Integer> personnel=new ArrayList<>();
-            //오늘 이전 || 7일이후
-            if(dateCounter.isBefore(LocalDate.now()) || dateCounter.isAfter(LocalDate.now().plusWeeks(1).minusDays(1))){
-                for (int j = 0; j < (dayTimePart.isWeekend() ? 3 : 4); j++) {
-                    personnel.add(0);
-                }
+
+//            List<Integer> personnel=new ArrayList<>();
+            //오늘 이전 || 7일이후 || 월요일(휴관일)제외
+            if(dateCounter.isBefore(LocalDate.now()) || dateCounter.isAfter(LocalDate.now().plusWeeks(1).minusDays(1))
+            || dateCounter.getDayOfWeek() ==DayOfWeek.MONDAY){
+                dayTimePart.setDate(dateCounter);
+                dayTimePart.setWeekend(dateCounter.getDayOfWeek() == DayOfWeek.SUNDAY || dateCounter.getDayOfWeek() == DayOfWeek.SATURDAY);
+//                for (int j = 0; j < (dayTimePart.isWeekend() ? 3 : 4); j++) {
+//                    personnel.add(0);
+//                }
             }
-            //월요일(휴관일)제외
-            else if(dateCounter.getDayOfWeek() ==DayOfWeek.MONDAY){
-                for (int j = 0; j < (dayTimePart.isWeekend() ? 3 : 4); j++) {
-                    personnel.add(0);
-                }
-            }
+            //실제 예약데이터기간
             else {
-                dayTimePart.setMaxPersonnel(timePartRepository.findByDateAndTimePart(dateCounter,1).getMaxPersonnel());
-                List<TimePart>  timePartList =timePartRepository.findAllByDate(dateCounter);
-                for (int j = 0; j < (dayTimePart.isWeekend() ? 3 : 4); j++) {
-                    personnel.add(timePartList.get(j).getVisitors().size());
-                    //TODO : 쿼리 줄이기- 연관관계 개수 받아올때 줄이기
-                }
+                //최대예약인원
+                dayTimePart = dayTimePartRepository.findByDate(dateCounter);
+                //혅재예약인원
+//                List<TimePart>  timePartList =timePartRepository.findAllByDate(dateCounter);
+//                for (int j = 0; j < (dayTimePart.isWeekend() ? 3 : 4); j++) {
+//                    personnel.add(timePartList.get(j).getVisitors().size());
+//                    //TODO : 쿼리 줄이기- 연관관계 개수 받아올때 줄이기
+//                }
             }
-            dayTimePart.setPersonnel(personnel);
+//            dayTimePart.setPersonnel(personnel);
 
             dayTimePartList.add(dayTimePart);
         }
@@ -76,6 +81,8 @@ public class TimePartService {
 
         return dayTimePartList;
     }
+
+
 
     private LocalDate findThisSunday() {
         LocalDate thisSunday;
@@ -87,8 +94,8 @@ public class TimePartService {
         return thisSunday;
     }
 
-
-    public List<DayTimePart> getWeekBookingDataForAdmin() {
-
-    }
+//
+//    public List<DayTimePart> getWeekBookingDataForAdmin() {
+//
+//    }
 }
