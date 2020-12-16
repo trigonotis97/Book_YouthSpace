@@ -28,6 +28,8 @@
         </ul>
 
         <ul class="list-group px-1" th:each="num: ${#numbers.sequence(0,6)}">
+            <li class="list-group-item " th:classappend="${dayTimePartList[__${num}__].getTimePartList().size()==0}?
+            list-group-item-dark :  ${dayTimePartList[__${num}__].isWeekend() ?'list-group-item-info' : 'list-group-item-success'}"
                 th:text="${dayTimePartList[__${num}__].date.getMonthValue()}+'월'+${dayTimePartList[__${num}__].date.getDayOfMonth()}+'일('+${dayOfWeek[__${num}__]} +')'">date</li>
             <li class="list-group-item" th:each="timePart : ${dayTimePartList[__${num}__].getTimePartList()}"
                 th:text="${timePart.getPersonnel()}+'명 예약'"></li>
@@ -46,6 +48,8 @@
         </ul>
 
         <ul class="list-group px-1" th:each="num: ${#numbers.sequence(7,13)}">
+            <li class="list-group-item " th:classappend="${dayTimePartList[__${num}__].getTimePartList().size()==0}?
+            list-group-item-dark :  ${dayTimePartList[__${num}__].isWeekend() ?'list-group-item-info' : 'list-group-item-success'}"
                 th:text="${dayTimePartList[__${num}__].date.getMonthValue()}+'월'+${dayTimePartList[__${num}__].date.getDayOfMonth()}+'일('+${dayOfWeek[__${num}__]}+')'">date</li>
             <li class="list-group-item" th:each="timePart : ${dayTimePartList[__${num}__].getTimePartList()}"
                 th:text="${timePart.getPersonnel()}+'명 예약'"></li>
