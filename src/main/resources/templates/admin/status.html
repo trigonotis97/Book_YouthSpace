@@ -35,14 +35,14 @@
                 </div>
             </a>
 
-            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
-               class="list-group-item list-group-item-action p-1">
-                <div class="d-flex w-100 justify-content-center">
-                    <p class="m-0 ">-</p>
-                    <small class="text-muted"></small>
+            <a th:if="${#sets.isEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+                                                     class="list-group-item list-group-item-action p-1">
+                        <div class="d-flex w-100 justify-content-center">
+                            <p class="m-0 ">-</p>
+                            <small class="text-muted"></small>
                 </div>
             </a>
-            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+            <a th:if="${!#sets.isEmpty(timePartList[__${num}__].getVisitors())}"
                th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
                th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-between">
@@ -67,14 +67,14 @@
                 </div>
             </a>
 
-            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+            <a th:if="${#sets.isEmpty(timePartList[__${num}__].getVisitors())}" href="#"
                class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-center">
                     <p class="m-0 ">-</p>
                     <small class="text-muted"></small>
                 </div>
             </a>
-            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+            <a th:if="${!#sets.isEmpty(timePartList[__${num}__].getVisitors())}"
                th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
                th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-between">
@@ -99,14 +99,14 @@
                 </div>
             </a>
 
-            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+            <a th:if="${#sets.isEmpty(timePartList[__${num}__].getVisitors())}" href="#"
                class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-center">
                     <p class="m-0 ">-</p>
                     <small class="text-muted"></small>
                 </div>
             </a>
-            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+            <a th:if="${!#sets.isEmpty(timePartList[__${num}__].getVisitors())}"
                th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
                th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-between">
@@ -131,14 +131,14 @@
                 </div>
             </a>
 
-            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+            <a th:if="${#sets.isEmpty(timePartList[__${num}__].getVisitors())}" href="#"
                class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-center">
                     <p class="m-0 ">-</p>
                     <small class="text-muted"></small>
                 </div>
             </a>
-            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+            <a th:if="${!#sets.isEmpty(timePartList[__${num}__].getVisitors())}"
                th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
                th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-between">
