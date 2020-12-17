@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +28,8 @@ public class TimePartGenerator implements ApplicationRunner {
     private final TimePartRepository timePartRepository;
 
     private final DayTimePartRepository dayTimePartRepository;
+
+    private final SystemData systemData;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -95,7 +95,7 @@ public class TimePartGenerator implements ApplicationRunner {
             List<TimePart> currentTimePartList= timePartRepository.findAllByDate(countDate);
             DayTimePart currentDayTimePart = DayTimePart.builder()
                     .date(countDate)
-                    .maxPersonnel(SystemData.MAXIMUM_BOOKING_NUMBER)
+                    .maxPersonnel(systemData.getMaximumBookingNumber())
                     .timePartList(currentTimePartList)
                     .weekend(timePartCounter ==3)
                     .build();

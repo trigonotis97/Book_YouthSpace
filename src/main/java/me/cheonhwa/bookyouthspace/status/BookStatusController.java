@@ -2,6 +2,7 @@ package me.cheonhwa.bookyouthspace.status;
 
 import lombok.RequiredArgsConstructor;
 import me.cheonhwa.bookyouthspace.domain.DayTimePart;
+import me.cheonhwa.bookyouthspace.domain.SystemData;
 import me.cheonhwa.bookyouthspace.timepart.TimePartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ public class BookStatusController {
 
     private final TimePartService timePartService;
 
+    private final SystemData systemData;
+
 
 
     @GetMapping("/status")
@@ -28,6 +31,8 @@ public class BookStatusController {
         model.addAttribute("dayTimePartList",timePartService.getWeekDayTimePart());
         //요일표시
         model.addAttribute("dayOfWeek",timePartService.getDayOfTwoWeekStringList());
+
+        model.addAttribute(systemData);
 
         return "book/status";
     }

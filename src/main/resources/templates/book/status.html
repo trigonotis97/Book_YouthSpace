@@ -21,10 +21,10 @@
     <div class="row">
         <ul class="list-group px-1">
             <li class="list-group-item">#</li>
-            <li class="list-group-item">1타임 (오전10:00 ~ 12:00)</li>
-            <li class="list-group-item">2타임 (낮12:30 ~ 낮2:30)</li>
-            <li class="list-group-item">3타임 (오후3:00 ~ 5:00)</li>
-            <li class="list-group-item">4타임 (오후5:30 ~ 7:30)</li>
+            <li class="list-group-item" th:text="${systemData.getFirstPartTime()}">1</li>
+            <li class="list-group-item" th:text="${systemData.getSecondPartTime()}">2</li>
+            <li class="list-group-item" th:text="${systemData.getThirdPartTime()}">3</li>
+            <li class="list-group-item" th:text="${systemData.getFourthPartTime()}">4</li>
         </ul>
 
         <ul class="list-group px-1" th:each="num: ${#numbers.sequence(0,6)}">
@@ -41,10 +41,10 @@
     <div class="row">
         <ul class="list-group px-1">
             <li class="list-group-item">#</li>
-            <li class="list-group-item">1타임 (오전10:00 ~ 12:00)</li>
-            <li class="list-group-item">2타임 (낮12:30 ~ 낮2:30)</li>
-            <li class="list-group-item">3타임 (오후3:00 ~ 5:00)</li>
-            <li class="list-group-item">4타임 (오후5:30 ~ 7:30)</li>
+            <li class="list-group-item" th:text="${systemData.getFirstPartTime()}">1</li>
+            <li class="list-group-item" th:text="${systemData.getSecondPartTime()}">2</li>
+            <li class="list-group-item" th:text="${systemData.getThirdPartTime()}">3</li>
+            <li class="list-group-item" th:text="${systemData.getFourthPartTime()}">4</li>
         </ul>
 
         <ul class="list-group px-1" th:each="num: ${#numbers.sequence(7,13)}">
