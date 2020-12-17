@@ -44,7 +44,7 @@ public class TimePartService {
 
 
 
-        LocalDate dateCounter = findThisSunday();
+        LocalDate dateCounter = findThisSunday(LocalDate.now());
         LocalDate end2week=dateCounter.plusWeeks(2);
         for (; dateCounter.isBefore(end2week); dateCounter=dateCounter.plusDays(1)) {
             DayTimePart dayTimePart=new DayTimePart();
@@ -84,15 +84,18 @@ public class TimePartService {
 
 
 
-    private LocalDate findThisSunday() {
+    public LocalDate findThisSunday(LocalDate date) {
         LocalDate thisSunday;
-        if (LocalDate.now().getDayOfWeek() == DayOfWeek.SUNDAY) {
-            thisSunday = LocalDate.now();
+        if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            thisSunday = date;
         } else {
-            thisSunday = LocalDate.now().minusDays(LocalDate.now().getDayOfWeek().ordinal() + 1);
+            thisSunday = date.minusDays(LocalDate.now().getDayOfWeek().ordinal() + 1);
         }
         return thisSunday;
     }
+
+
+
 
 //
 //    public List<DayTimePart> getWeekBookingDataForAdmin() {

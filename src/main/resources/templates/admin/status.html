@@ -21,144 +21,137 @@
         <button type="button" class="btn btn-info btn-lg" onclick="location.href='/'">홈으로 돌아가기</button>
         <hr/>
     </div>
+
+    <div class="row text-left font-weight-bold" th:text="${systemData.getFirstPartTime()}">1time</div>
     <div class="row">
-            
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action p-1" >
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="m-0">김룰루</p>
-                        <small class="text-muted">(010-4505-7196)</small>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action p-1" >
-                    <div class="d-flex w-100 justify-content-between">
-                        <p class="m-0">김룰루</p>
-                        <small class="text-muted">(010-4505-7196)</small>
-                    </div>
-                </a>
-            </div>
-        <div class="list-group">
-            <a th:each="i : ${#numbers.sequence(1,5)}">
-            <a href="#" class="list-group-item list-group-item-action p-1" >
+        <!--TODO : 현재날짜인경우  listgroup 색상변경-->
+        <div class="list-group" th:each="num : ${#numbers.sequence(0,6)}">
+            <a href="#" class="list-group-item list-group-item-action p-1" th:classappend="${timePartList[__${num}__].getDate()==today} ? list-group-item-info : list-group-item-secondary">
                 <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
+                    <p class="m-0"
+                       th:text="${timePartList[__${num}__].getDate().getMonthValue()}+'월' + ${timePartList[__${num}__].getDate().getDayOfMonth()} + '일('+${dayOfWeekList[__${numStat.index}__]}+')'">
+                        title</p>
+                    <small class="text-muted"></small>
                 </div>
             </a>
-            <a href="#" class="list-group-item list-group-item-action p-1" >
+
+            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+               class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-center">
                     <p class="m-0 ">-</p>
                     <small class="text-muted"></small>
                 </div>
             </a>
-        </div>
-        <hr/>
-        <br/>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action p-1" >
+            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+               th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
+               th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
                 <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action p-1" >
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
+                    <p class="m-0" th:text="${visitor.getName()}">name</p>
+                    <small class="text-muted" th:text="${visitor.getPhoneNumber()}">phone number</small>
                 </div>
             </a>
         </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action p-1" >
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action p-1" >
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
-                </div>
-            </a>
-        </div>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action p-1" >
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action p-1" >
-                <div class="d-flex w-100 justify-content-between">
-                    <p class="m-0">김룰루</p>
-                    <small class="text-muted">(010-4505-7196)</small>
-                </div>
-            </a>
-        </div>        <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action p-1" >
-            <div class="d-flex w-100 justify-content-between">
-                <p class="m-0">김룰루</p>
-                <small class="text-muted">(010-4505-7196)</small>
-            </div>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-1" >
-            <div class="d-flex w-100 justify-content-between">
-                <p class="m-0">김룰루</p>
-                <small class="text-muted">(010-4505-7196)</small>
-            </div>
-        </a>
-    </div>
-
-
-
-
-
-    </div>
-
-
-    <!--
-    <div class="row">
-        <ul class="list-group px-1">
-            <li class="list-group-item">#</li>
-            <li class="list-group-item">1타임 (오전10:00 ~ 12:00)</li>
-            <li class="list-group-item">2타임 (낮12:30 ~ 낮2:30)</li>
-            <li class="list-group-item">3타임 (오후3:00 ~ 5:00)</li>
-            <li class="list-group-item">4타임 (오후5:30 ~ 7:30)</li>
-        </ul>
-
-        <ul class="list-group px-1" th:each="num: ${#numbers.sequence(0,6)}">
-            <li class="list-group-item " th:classappend="${dayTimePartList[__${num}__].isWeekend()} ? list-group-item-info : list-group-item-success"
-                th:text="${dayTimePartList[__${num}__].date.getMonthValue()}+'월'+${dayTimePartList[__${num}__].date.getDayOfMonth()}+'일('+${dayOfWeek[__${num}__]} +')'">date</li>
-            <li class="list-group-item" th:each="personnel : ${dayTimePartList[__${num}__].personnel}"
-                th:text="${personnel}+'명 예약'"></li>
-        </ul>
-
-
     </div>
     <hr/>
+
+    <div class="row text-left font-weight-bold" th:text="${systemData.getSecondPartTime()}">2time</div>
     <div class="row">
-        <ul class="list-group px-1">
-            <li class="list-group-item">#</li>
-            <li class="list-group-item">1타임 (오전10:00 ~ 12:00)</li>
-            <li class="list-group-item">2타임 (낮12:30 ~ 낮2:30)</li>
-            <li class="list-group-item">3타임 (오후3:00 ~ 5:00)</li>
-            <li class="list-group-item">4타임 (오후5:30 ~ 7:30)</li>
-        </ul>
+        <!--TODO : 현재날짜인경우  listgroup 색상변경-->
+        <div class="list-group" th:each="num : ${#numbers.sequence(7,13)}">
+            <a href="#" class="list-group-item list-group-item-action p-1" th:classappend="${timePartList[__${num}__].getDate()==today} ? list-group-item-info : list-group-item-secondary">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0"
+                       th:text="${timePartList[__${num}__].getDate().getMonthValue()}+'월' + ${timePartList[__${num}__].getDate().getDayOfMonth()} + '일('+${dayOfWeekList[__${numStat.index}__]}+')'">
+                        title</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
 
-        <ul class="list-group px-1" th:each="num: ${#numbers.sequence(7,13)}">
-            <li class="list-group-item " th:classappend="${dayTimePartList[__${num}__].isWeekend()} ? list-group-item-info : list-group-item-success"
-                th:text="${dayTimePartList[__${num}__].date.getMonthValue()}+'월'+${dayTimePartList[__${num}__].date.getDayOfMonth()}+'일('+${dayOfWeek[__${num}__]}+')'">date</li>
-            <li class="list-group-item" th:each="personnel : ${dayTimePartList[__${num}__].personnel}"
-                th:text="${personnel}+'명 예약'"></li>
-        </ul>
-
-
+            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+               class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-center">
+                    <p class="m-0 ">-</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
+            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+               th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
+               th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0" th:text="${visitor.getName()}">name</p>
+                    <small class="text-muted" th:text="${visitor.getPhoneNumber()}">phone number</small>
+                </div>
+            </a>
+        </div>
     </div>
+    <hr/>
 
--->
+    <div class="row text-left font-weight-bold" th:text="${systemData.getThirdPartTime()}">3time</div>
+    <div class="row">
+        <!--TODO : 현재날짜인경우  listgroup 색상변경-->
+        <div class="list-group" th:each="num : ${#numbers.sequence(14,20)}">
+            <a href="#" class="list-group-item list-group-item-action p-1" th:classappend="${timePartList[__${num}__].getDate()==today} ? list-group-item-info : list-group-item-secondary">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0"
+                       th:text="${timePartList[__${num}__].getDate().getMonthValue()}+'월' + ${timePartList[__${num}__].getDate().getDayOfMonth()} + '일('+${dayOfWeekList[__${numStat.index}__]}+')'">
+                        title</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
+
+            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+               class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-center">
+                    <p class="m-0 ">-</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
+            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+               th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
+               th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0" th:text="${visitor.getName()}">name</p>
+                    <small class="text-muted" th:text="${visitor.getPhoneNumber()}">phone number</small>
+                </div>
+            </a>
+        </div>
+    </div>
+    <hr/>
+
+    <div class="row text-left font-weight-bold" th:text="${systemData.getFourthPartTime()} + '(평일만)'">4time</div>
+    <div class="row">
+        <!--TODO : 현재날짜인경우  listgroup 색상변경-->
+        <div class="list-group" th:each="num : ${#numbers.sequence(21,27)}">
+            <a href="#" class="list-group-item list-group-item-action p-1" th:classappend="${timePartList[__${num}__].getDate()==today} ? list-group-item-info : list-group-item-secondary">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0"
+                       th:text="${timePartList[__${num}__].getDate().getMonthValue()}+'월' + ${timePartList[__${num}__].getDate().getDayOfMonth()} + '일('+${dayOfWeekList[__${numStat.index}__]}+')'">
+                        title</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
+
+            <a th:if="${#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}" href="#"
+               class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-center">
+                    <p class="m-0 ">-</p>
+                    <small class="text-muted"></small>
+                </div>
+            </a>
+            <a th:if="${!#strings.setIsEmpty(timePartList[__${num}__].getVisitors())}"
+               th:each=" visitor : ${timePartList[__${num}__].getVisitors()}" href="#"
+               th:href="@{'/admin/visitor?id='+${visitor.getId()}}" class="list-group-item list-group-item-action p-1">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="m-0" th:text="${visitor.getName()}">name</p>
+                    <small class="text-muted" th:text="${visitor.getPhoneNumber()}">phone number</small>
+                </div>
+            </a>
+        </div>
+    </div>
+    <hr/>
 
 
 </div>
+
 </body>
 </html>
